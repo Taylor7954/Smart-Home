@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+	<h1>DashBoard <small> Welcome, {{session.username}}</small></h1>
+	<div id="temp">
+		Temperature: <span> Some database display</span>
+	</div>
+	<div id="utilities">
+		<h1> Utilities </h1>
+		<button class="btn btn-primary" id="Expenses">Expenses</button>
+		<button class="btn btn-primary" id="Usage">Usage</button>
+	</div>
+	<div id="sensor">
+		<h1> Sensor </h1>
+		<button class="btn btn-primary" id="locateDog">Where's my dog?</button>
+		<button class="btn btn-primary" id="locateKeys">Where's my keys?</button>
+	</div>
+
+	<div class="dropdown" id="languages">
+		<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Language
+		<span class="caret"></span></button>
+		<ul class="dropdown-menu">
+			<li><a href="#" id="english">English</a></li>
+			<li><a href="#" id="japanese">Japanese</a></li>
+		</ul>
+	</div>
+
+
+{% endblock %}
