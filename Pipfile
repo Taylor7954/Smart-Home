@@ -18,3 +18,4 @@ sshtunnel = "*"
 
 pylint = "*"
 mypy = "*"
+alembic = "*"
