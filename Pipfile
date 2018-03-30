@@ -8,8 +8,8 @@ name = "pypi"
 [packages]
 
 requests = "*"
-flask = "*"
-sqlalchemy = "*"
+Flask = "*"
+SQLAlchemy = "*"
 sshtunnel = "*"
 "psycopg2" = "*"
 
@@ -18,4 +18,3 @@ sshtunnel = "*"
 
 pylint = "*"
 mypy = "*"
-alembic = "*"

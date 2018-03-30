@@ -3,7 +3,7 @@
 from os import environ
 
 # ===PIP IMPORTS
-from sqlalchemy import Column, DateTime, Integer, String, Text, ForeignKey
+from sqlalchemy import Column, DateTime, Boolean, Integer, String, Text, ForeignKey
 from sqlalchemy.dialects.postgresql import JSONB
 
 from sqlalchemy import create_engine
@@ -26,7 +26,7 @@ class User(Base):
     # name used to greet user
     name = Column(Text, nullable=False)
 
-    houses = relationship('capstone_homes', backref='capstone_users', lazy=True)
+    homes = relationship('capstone_homes', backref='capstone_users', lazy=True)
 
     def __repr__(self):
         return f'<User {self.email}>'
@@ -45,7 +45,76 @@ class Home(Base):
     state = Column(Text)
     zip_code = Column(Integer)
 
-    rooms = relationship('Room', backref='home', lazy=True)
+    rooms = relationship('capstone_rooms', backref='capstone_homes', lazy=True)
+
+class Room(Base):
+
+    __tablename__ = 'capstone_rooms'
+
+    id = Column(Integer, primary_key = True)
+
+    home_id = Column(Integer, ForeignKey('capstone_homes.id'), nullable=False)
+
+    name = Column(Text, nullable=False)
+
+    # define lights and entry points for room
+    # cascade means that if the room is deleted, so are they
+    rooms = relationship('Light', backref='room', cascade="all,delete", lazy=True)
+    rooms = relationship('EntryPoint', backref='room', cascade="all,delete", lazy=True)
+
+class Light(Base):
+
+    __tablename__ = 'capstone_lights'
+
+    id = Column(Integer, primary_key=True)
+
+    room_id = Column(Integer, ForeignKey('capstone_rooms.id'), nullable=False)
+
+    # room name can be queried from the DB
+    # specify default name?
+    name = Column(Text)
+    is_on = Column(Boolean)
+
+    def __repr__(self):
+        return f'<Light {self.room}: {self.name}>'
+
+class EntryPoint(Base):
+
+    __tablename__ = 'capstone_entry_points'
+
+    id = Column(Integer, primary_key=True)
+
+    room_id = Column(Integer, ForeignKey('room.id'), nullable=False)
+
+    name = Column(Text)
+    is_open = Column(Boolean)
+
+class ThingTracker(Base):
+
+    __tablename__ = 'capstone_thing_trackers'
+
+    # NOTE: pretty sure the ThingTracker will suffice for the pet tracker, too
+    id = Column(Integer, primary_key=True)
+
+    # link all the things to a house
+    home_id = Column(Integer, ForeignKey('home.id'), nullable=False)
+
+    # things can be taken out of the house, so 
+    room_id = Column(Integer, ForeignKey('room.id'))
+
+    name = Column(Text)
+
+# class PetTracker(Model):
+#     id = Column(Integer, primary_key=True)
+
+#     # link all the things to a house
+#     home_id = Column(Integer, ForeignKey('home.id'), nullable=False)
+
+#     # things can be taken out of the house, so 
+#     room_id = Column(Integer, ForeignKey('room.id'))
+
+#     name = Column(Text)
+
 
 # create sshtunnel
 server = SSHTunnelForwarder(
@@ -64,8 +133,7 @@ db_uri = f'postgres://smso3223:Thefoxranupthetree33@127.0.0.1:{local_port}/smso3
 # db_uri = f'postgres://wjsetzer:EnLgKLzj@127.0.0.1:5432/infinitechan'
 engine = create_engine(db_uri)
 
-if not engine.dialect.has_table(engine, User.__tablename__):
-    Base.metadata.create_all(engine)
+Base.metadata.create_all(engine)
 
 Session = sessionmaker(bind=engine)
 
