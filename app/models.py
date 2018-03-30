@@ -84,7 +84,7 @@ class EntryPoint(Base):
 
     id = Column(Integer, primary_key=True)
 
-    room_id = Column(Integer, ForeignKey('room.id'), nullable=False)
+    room_id = Column(Integer, ForeignKey('capstone_rooms.id'), nullable=False)
 
     name = Column(Text)
     is_open = Column(Boolean)
@@ -97,10 +97,10 @@ class ThingTracker(Base):
     id = Column(Integer, primary_key=True)
 
     # link all the things to a house
-    home_id = Column(Integer, ForeignKey('home.id'), nullable=False)
+    home_id = Column(Integer, ForeignKey('capstone_homes.id'), nullable=False)
 
     # things can be taken out of the house, so 
-    room_id = Column(Integer, ForeignKey('room.id'))
+    room_id = Column(Integer, ForeignKey('capstone_rooms.id'))
 
     name = Column(Text)
 
