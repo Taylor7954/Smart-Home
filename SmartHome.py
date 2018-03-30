@@ -29,6 +29,9 @@ class RegisterForm(Form):
 	name = StringField('Name', [validators.Length(min=1, max=50)])
 	username = StringField('Username', [validators.Length(min=4, max=25)])
 	email = StringField('Email', [validators.Length(min=6, max= 50)])
+	address = StringField('Address', [validators.Length(min=6, max= 50)])
+	city = StringField('City', [validators.Length(min=6, max= 50)])
+	state = StringField('State', [validators.Length(min=6, max= 15)])
 	password = PasswordField('Password',[
 		validators.DataRequired(),
 		validators.EqualTo('confirm', message="Passwords do not match.")])
@@ -49,6 +52,9 @@ def register():
 	if request.method == 'POST' and form.validate():
 		name = form.name.data
 		email = form.email.data
+		address = form.address.data
+		city = form.city.data
+		state = form.state.data
 		username = form.username.data
 		password = sha256_crypt.encrypt(str(form.password.data))
 		
