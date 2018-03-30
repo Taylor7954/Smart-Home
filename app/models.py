@@ -115,13 +115,22 @@ class ThingTracker(Base):
 
 #     name = Column(Text)
 
+# get username config
+try:
+    with open('sshcfg.txt', 'r') as f:
+        name = f.read()
+        # print(name.encode())
+except FileNotFoundError:
+    print('Create a sshcfg.txt and place your blazerid in it.')
+    print('Make sure you have an ssh key made')
+    exit()
 
 # create sshtunnel
 server = SSHTunnelForwarder(
     'lan.cis.uab.edu',
-    ssh_username='smso3223',
-    # ssh_pkey="~/.ssh/id_rsa",
-    ssh_password='Thefoxranupthetree33',
+    ssh_username=name,
+    ssh_pkey="~/.ssh/id_rsa",
+    # ssh_password='Thefoxranupthetree33',
     # local_bind_address=('localhost', 10_000),
     remote_bind_address=('cisdb.cis.uab.edu', 5432)
 )
