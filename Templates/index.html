@@ -1,4 +1,16 @@
 {% extends 'layout.html' %}
 {% block body %}
-	HOME
+<div class="col-sm-6 col-sm-offset-3">
+	<div class="panel panel-default">
+		<div class="panel-heading text-center">Smart Home</div>
+		<div class="panel-body text-center">
+			{% if session.logged_in %}
+			<a href="/dashboard" class="btn btn-default">Dashboard</a>
+			{% else %}
+			<a href="/login" class="btn btn-default">Login</a><br>
+			<a href="/register" class="btn btn-default">Register</a>
+			{% endif %}
+		</div>
+	</div>
+</div>
 {% endblock %}
