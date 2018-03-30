@@ -31,7 +31,7 @@ class RegisterForm(Form):
 	email = StringField('Email', [validators.Length(min=6, max= 50)])
 	address = StringField('Address', [validators.Length(min=6, max= 50)])
 	city = StringField('City', [validators.Length(min=6, max= 50)])
-	state = StringField('State', [validators.Length(min=6, max= 15)])
+	state = StringField('State', [validators.Length(min=6, max= 50)])
 	password = PasswordField('Password',[
 		validators.DataRequired(),
 		validators.EqualTo('confirm', message="Passwords do not match.")])
@@ -44,6 +44,17 @@ class RegisterForm(Form):
 	#close connection cursor.close()
 	#flash('You are now registered and can log in', 'success') ** this gives success message
 	#return redirect(url_for('login')) redirect for login page
+
+@app.route('/registerHouse', methods=['GET', 'POST'])
+def registerHouse():
+	form = RegisterForm(request.form)
+	if request.method == 'POST' and form.validate():
+		address = form.address.data
+		city = form.city.data
+		state = form.state.data
+		
+		return render_template('registerHouse.html')
+	return render_template('registerHouse.html', form=form)
 	
 #User Register
 @app.route('/register', methods=['GET', 'POST'])
@@ -52,9 +63,6 @@ def register():
 	if request.method == 'POST' and form.validate():
 		name = form.name.data
 		email = form.email.data
-		address = form.address.data
-		city = form.city.data
-		state = form.state.data
 		username = form.username.data
 		password = sha256_crypt.encrypt(str(form.password.data))
 		
