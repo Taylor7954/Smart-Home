@@ -8,10 +8,12 @@ name = "pypi"
 [packages]
 
 requests = "*"
-Flask = "*"
-SQLAlchemy = "*"
+flask = "*"
+sqlalchemy = "*"
 sshtunnel = "*"
 "psycopg2" = "*"
+wtforms = "*"
+passlib = "*"
 
 
 [dev-packages]
