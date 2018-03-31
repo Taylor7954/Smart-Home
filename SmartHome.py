@@ -87,7 +87,7 @@ def register():
 			#save changes
 			session.commit()
 		else:
-			flash('Registration unsuccessful', 'error')
+			flash("Email already registered")
 			return render_template('register.html', form=form)
 		
 		#close connection
@@ -105,6 +105,25 @@ def login():
 		email= request.form['email']
 		password_candidate = request.form['password']
 		
+		sess = Session()
+		
+		#Query database for email and password
+		userMatch = sess.query(User.email)\
+        .filter(User.email==email)\
+		.filter(User.password_hash==password_candidate)\
+        .all()
+		
+		name = sess.query(User.name).filter(User.email==email).first()
+		
+		if userMatch:
+			session['logged_in'] = True
+			session['name'] = name[0]
+			flash("You are now logged in", "success")
+			return redirect(url_for('index'))
+		else:
+			error="Invalid Login"
+			return render_template('login.html', error=error)
+			
 		#create cursor
 		#cursor = database.connection.cursor()
 		
@@ -121,15 +140,13 @@ def login():
 				#session['logged_in'] = True
 				#session['email'] = email
 				#flash("You are now logged in", "success")
-				#return redirect(url_for('home'))
+				#return redirect(url_for('index'))
 			#else:
 				#error = "Invalid Login"
 				#return render_template('login.html', error=error)
 		#else:
 			#error="User not found"
 			#return render_template('login.html', error=error)
-		
-		pass
 	return render_template('login.html')
 
 #Dashboard
