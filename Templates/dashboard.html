@@ -1,29 +1,56 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-	<h1>DashBoard <small> Welcome, {{session.username}}</small></h1>
+	<h1>DashBoard <small> Welcome, {{session.name}}</small></h1>
 	<div id="temp">
 		Temperature: <span> Some database display</span>
 	</div>
-	<div id="utilities">
-		<h1> Utilities </h1>
-		<button class="btn btn-primary" id="Expenses">Expenses</button>
-		<button class="btn btn-primary" id="Usage">Usage</button>
+	<h2> Utilities </h2>
+	<div class="row">
+		<div class="col-lg-2 col-md-4 col-sm-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="water">Water</p>
+				</div>
+				<div class="panel-body">
+					<h2 id="waterUsage"><h2>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-2 col-md-4 col-sm-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="electric">Electricity</p>
+				</div>
+				<div class="panel-body">
+					<h2 id="electricityUsage"><h2>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<!-- Graphs -->
+		<div class="col-lg-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="water">Water</p>
+				</div>
+				<div class="panel-body">
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="electric">Electricity</p>
+				</div>
+				<div class="panel-body">
+				</div>
+			</div>
+		</div>
+		</div>
 	</div>
 	<div id="sensor">
-		<h1> Sensor </h1>
-		<button class="btn btn-primary" id="locateDog">Where's my dog?</button>
-		<button class="btn btn-primary" id="locateKeys">Where's my keys?</button>
+		<h2> Sensors </h2>
 	</div>
-
-	<div class="dropdown" id="languages">
-		<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Language
-		<span class="caret"></span></button>
-		<ul class="dropdown-menu">
-			<li><a href="#" id="english">English</a></li>
-			<li><a href="#" id="japanese">Japanese</a></li>
-		</ul>
-	</div>
-
-
 {% endblock %}

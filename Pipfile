@@ -1,0 +1,20 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[packages]
+
+requests = "*"
+Flask = "*"
+SQLAlchemy = "*"
+sshtunnel = "*"
+"psycopg2" = "*"
+
+
+[dev-packages]
+
+pylint = "*"
+mypy = "*"

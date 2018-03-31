@@ -1,7 +1,8 @@
 from flask import Flask, render_template, flash, redirect, url_for, session, logging, request
 from flask_sqlalchemy import SQLAlchemy
-from wtforms import Form, StringField, TextAreaField, PasswordField, validators
+from wtforms import Form, StringField, TextAreaField, PasswordField, IntegerField, validators
 from passlib.hash import sha256_crypt
+from app.models import engine, Session, User
 
 app = Flask(__name__)
 
@@ -27,12 +28,17 @@ def contact():
 
 class RegisterForm(Form):
 	name = StringField('Name', [validators.Length(min=1, max=50)])
-	username = StringField('Username', [validators.Length(min=4, max=25)])
 	email = StringField('Email', [validators.Length(min=6, max= 50)])
+	address = StringField('Address', [validators.Length(min=6, max= 50)])
+	city = StringField('City', [validators.Length(min=6, max= 50)])
+	state = StringField('State', [validators.Length(min=6, max= 50)])
+	zip = IntegerField('Zip Code')
 	password = PasswordField('Password',[
 		validators.DataRequired(),
 		validators.EqualTo('confirm', message="Passwords do not match.")])
 	confirm = PasswordField('Confirm Password')
+
+			
 	
 	#DATABASE FOR USER
 	#Create cursor  cursor = (database.connection.cursor())
@@ -41,18 +47,55 @@ class RegisterForm(Form):
 	#close connection cursor.close()
 	#flash('You are now registered and can log in', 'success') ** this gives success message
 	#return redirect(url_for('login')) redirect for login page
+
+@app.route('/registerHouse', methods=['GET', 'POST'])
+def registerHouse():
+	form = RegisterForm(request.form)
+	if request.method == 'POST' and form.validate():
+		address = form.address.data
+		city = form.city.data
+		state = form.state.data
+		zip = form.zip.data
+		
+		return render_template('registerHouse.html')
+	return render_template('registerHouse.html', form=form)
 	
 #User Register
 @app.route('/register', methods=['GET', 'POST'])
 def register():
 	form = RegisterForm(request.form)
-	if request.method == 'POST' and form.validate():
+	if request.method == 'POST':
+		print(form.name.data)
 		name = form.name.data
 		email = form.email.data
-		username = form.username.data
-		password = sha256_crypt.encrypt(str(form.password.data))
+		password = form.password.data
 		
-		return render_template('register.html')
+		#create new db session
+		session = Session()
+		#create new user: A new user is identified by name, email, password
+		new_user = User(name=name, email=email, password_hash=password)
+	
+		#Does the email already exist
+		###match = session.query(User).filter(User.email==email)
+
+		match =  session.query(User)\
+        .filter(User.email==email)\
+        .all()
+		#If the email is unique the user is added
+		if not match:
+			print(f'Added: {new_user}')
+			session.add(new_user)
+		else:
+			flash('Registration unsuccessful', 'error')
+			return render_template('register.html', form=form)
+		#save changes
+		session.commit()
+		
+		#close connection
+		session.close()
+		flash('You are now registered and can log in', 'success')
+		
+		return redirect(url_for('login'))
 	return render_template('register.html', form=form)
 
 #User Login
@@ -60,14 +103,14 @@ def register():
 def login():
 	if request.method == 'POST':
 		#Get form fields
-		username= request.form['username']
+		email= request.form['email']
 		password_candidate = request.form['password']
 		
 		#create cursor
 		#cursor = database.connection.cursor()
 		
-		#Get user by username
-		#result = cursor.execute("SELECT * FROM users WHERE username = %s", [username])
+		#Get user by email
+		#result = cursor.execute("SELECT * FROM users WHERE email = %s", [email])
 		#if result > 0:
 			#get stored hash
 			#data = cursor.fetchone()
@@ -77,7 +120,7 @@ def login():
 			#if sha256_crypt.verify(password_candidate, password):
 				#passed
 				#session['logged_in'] = True
-				#session['username'] = username
+				#session['email'] = email
 				#flash("You are now logged in", "success")
 				#return redirect(url_for('home'))
 			#else:

@@ -1,1 +1,1 @@
-# Smart-Home-0.5
+# Smart-Home-0.6
