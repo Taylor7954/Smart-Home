@@ -1,9 +1,9 @@
 
 # ===STD Imports
-from os import environ
+# from os import environ
 
 # ===PIP IMPORTS
-from sqlalchemy import Column, DateTime, Boolean, Integer, String, Text, ForeignKey
+from sqlalchemy import Column, DateTime, Boolean, Float, Integer, String, Text, ForeignKey
 from sqlalchemy.dialects.postgresql import JSONB
 
 from sqlalchemy import create_engine
@@ -44,6 +44,9 @@ class Home(Base):
     city = Column(Text)
     state = Column(Text)
     zip_code = Column(Integer)
+
+    latitude = Column(Float)
+    longitude = Column(Float)
 
     rooms = relationship('capstone_rooms', backref='capstone_homes', lazy=True)
 
@@ -104,6 +107,21 @@ class ThingTracker(Base):
 
     name = Column(Text)
 
+class Forecast(Base):
+    __tablename__ = 'capstone_forecasts'
+
+    id = Column(Integer, primary_key=True)
+
+    latitude = Column(Float)
+    longitude = Column(Float)
+
+    temperature = Column(Float)
+    precipType = Column(Text)
+    precipIntensity = Column(Float) # inches of liquid per hour
+    precipProbability = Column(Float) # between 0 and 1
+
+    time = Column(Integer)
+
 # class PetTracker(Model):
 #     id = Column(Integer, primary_key=True)
 
@@ -145,4 +163,3 @@ engine = create_engine(db_uri)
 Base.metadata.create_all(engine)
 
 Session = sessionmaker(bind=engine)
-
