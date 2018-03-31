@@ -76,7 +76,7 @@ def register():
 	
 		#Does the email already exist
 		match =  session.query(User)\
-        .filter(email==form.email.data)\
+        .filter(User.email==email)\
         .all()
 	
 		#If the email is unique the user is added
