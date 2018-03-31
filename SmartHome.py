@@ -65,7 +65,6 @@ def registerHouse():
 def register():
 	form = RegisterForm(request.form)
 	if request.method == 'POST':
-		print(form.name.data)
 		name = form.name.data
 		email = form.email.data
 		password = form.password.data
@@ -78,18 +77,18 @@ def register():
 		#Does the email already exist
 		###match = session.query(User).filter(User.email==email)
 
-		match =  session.query(User)\
+		match = session.query(User.email)\
         .filter(User.email==email)\
         .all()
 		#If the email is unique the user is added
 		if not match:
 			print(f'Added: {new_user}')
 			session.add(new_user)
+			#save changes
+			session.commit()
 		else:
 			flash('Registration unsuccessful', 'error')
 			return render_template('register.html', form=form)
-		#save changes
-		session.commit()
 		
 		#close connection
 		session.close()
