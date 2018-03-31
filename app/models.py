@@ -151,15 +151,13 @@ server = SSHTunnelForwarder(
     'lan.cis.uab.edu',
     ssh_username=name,
     ssh_pkey="~/.ssh/id_rsa",
-    # ssh_password='Thefoxranupthetree33',
-    # local_bind_address=('localhost', 10_000),
     remote_bind_address=('cisdb.cis.uab.edu', 5432)
 )
 
 server.start()
 local_port = server.local_bind_port
 
-db_uri = f'postgres://smso3223:Thefoxranupthetree33@127.0.0.1:{local_port}/smso3223'
+db_uri = f'postgres://smso3223web:smso3223@127.0.0.1:{local_port}/smso3223'
 # db_uri = f'postgres://wjsetzer:EnLgKLzj@127.0.0.1:5432/infinitechan'
 engine = create_engine(db_uri)
 
