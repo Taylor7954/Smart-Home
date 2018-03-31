@@ -30,7 +30,8 @@ def filter_weather(data):
     # print(data)
     for _x in data:
         # pop all except for interested keys
-        keys = ('time', 'summary', 'precipIntensity', 'precipProbability', 'precipType', 'temperature')
+        # keys = ('time', 'summary', 'precipIntensity', 'precipProbability', 'precipType', 'temperature')
+        keys = ('time', 'precipIntensity', 'precipProbability', 'precipType', 'temperature')
 
         _x_keys = list(_x.keys())
         for key in _x_keys:
@@ -39,28 +40,48 @@ def filter_weather(data):
 
     return data
 
-# days grab in 48 hour chunks. Grab only 15 days
-march = datetime(2018, 3, 1).timestamp()
-print(march)
+def main():
+    # create a new session before executing inserts
+    session = Session()
 
-weather = get_weather(march, 33.699657, -86.635033)
-weather = filter_weather(weather)
-print(weather)
+    # days grab in 24 hour chunks
+    for day in range(1, 32):
+        # get weather for month of march
+        march = datetime(2018, 3, day).timestamp()
+        # print(march)
 
-# select on lat, lon, time
-values = {
+        lat = 33.699657
+        lon = -86.635033
+        weather = get_weather(march, lat, lon)
+        weather = filter_weather(weather)
+        # print(weather)
 
-}
+        # select on lat, lon, time
+        # make a new Forecast
+        for w in weather:
+            # print(**w)
+            new_forecast = Forecast(
+                latitude=lat,
+                longitude=lon,
+                **w
+            )
 
-session = Session()
+            # match on lat, lon, time
+            match = session.query(Forecast)\
+            .filter(Forecast.latitude==lat)\
+            .filter(Forecast.longitude==lon)\
+            .filter(Forecast.time==w['time'])\
+            .all()
+                
 
-stmt = insert(Forecast.__tablename__, values=values).values(
-    id='some_id',
-    data='inserted value'
-    )
+            # if there were no matching records, insert
+            if not match:
+                print(f'Added: {new_forecast}')
+                session.add(new_forecast)
 
-do_update_stmt = stmt.on_conflict_do_update(
-    index_elements=['id'],
-    set_=dict(data='updated value')
-    )
-session.execute(do_update_stmt)
+        # save changes
+    session.commit()
+    print('DONE')
+
+if __name__ == '__main__':
+    main()

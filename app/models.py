@@ -26,7 +26,7 @@ class User(Base):
     # name used to greet user
     name = Column(Text, nullable=False)
 
-    homes = relationship('capstone_homes', backref='capstone_users', lazy=True)
+    homes = relationship('Home', backref='capstone_users', lazy=True)
 
     def __repr__(self):
         return f'<User {self.email}>'
@@ -48,7 +48,7 @@ class Home(Base):
     latitude = Column(Float)
     longitude = Column(Float)
 
-    rooms = relationship('capstone_rooms', backref='capstone_homes', lazy=True)
+    rooms = relationship('Room', backref='capstone_homes', lazy=True)
 
 class Room(Base):
 
@@ -62,8 +62,8 @@ class Room(Base):
 
     # define lights and entry points for room
     # cascade means that if the room is deleted, so are they
-    rooms = relationship('Light', backref='room', cascade="all,delete", lazy=True)
-    rooms = relationship('EntryPoint', backref='room', cascade="all,delete", lazy=True)
+    rooms = relationship('Light', backref='capstone_rooms', cascade="all,delete", lazy=True)
+    rooms = relationship('EntryPoint', backref='capstone_rooms', cascade="all,delete", lazy=True)
 
 class Light(Base):
 
@@ -94,7 +94,7 @@ class EntryPoint(Base):
 
 class ThingTracker(Base):
 
-    __tablename__ = 'capstone_thing_trackers'
+    __tablename__ = 'capstone_thing_tracker'
 
     # NOTE: pretty sure the ThingTracker will suffice for the pet tracker, too
     id = Column(Integer, primary_key=True)
@@ -121,6 +121,9 @@ class Forecast(Base):
     precipProbability = Column(Float) # between 0 and 1
 
     time = Column(Integer)
+
+    def __repr__(self):
+        return f'<Forecast {self.time}, {self.latitude}, {self.longitude}>'
 
 # class PetTracker(Model):
 #     id = Column(Integer, primary_key=True)
