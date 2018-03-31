@@ -38,7 +38,7 @@ class RegisterForm(Form):
 		validators.EqualTo('confirm', message="Passwords do not match.")])
 	confirm = PasswordField('Confirm Password')
 
-	
+			
 	
 	#DATABASE FOR USER
 	#Create cursor  cursor = (database.connection.cursor())
@@ -64,7 +64,8 @@ def registerHouse():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
 	form = RegisterForm(request.form)
-	if request.method == 'POST' and form.validate():
+	if request.method == 'POST':
+		print(form.name.data)
 		name = form.name.data
 		email = form.email.data
 		password = form.password.data
@@ -75,19 +76,23 @@ def register():
 		new_user = User(name=name, email=email, password_hash=password)
 	
 		#Does the email already exist
-		match =  session.query(User)\
-        .filter(email==form.email.data)\
-        .all()
-	
+		###match = session.query(User).filter(User.email==email)
+
 		#If the email is unique the user is added
 		if not match:
 			print(f'Added: {new_user}')
 			session.add(new_user)
-	
+		else:
+			flash('Registration unsuccessful', 'error')
+			return render_template('register.html', form=form)
 		#save changes
 		session.commit()
 		
-		return render_template('register.html')
+		#close connection
+		session.close()
+		flash('You are now registered and can log in', 'success')
+		
+		return redirect(url_for('login'))
 	return render_template('register.html', form=form)
 
 #User Login
