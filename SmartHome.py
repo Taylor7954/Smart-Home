@@ -76,8 +76,15 @@ def register():
 		new_user = User(name=name, email=email, password_hash=password)
 	
 		#Does the email already exist
+<<<<<<< HEAD
 		###match = session.query(User).filter(User.email==email)
 
+=======
+		match =  session.query(User)\
+        .filter(User.email==email)\
+        .all()
+	
+>>>>>>> 3da8c9ad2bf248a03a5a8637509f1356679e7a28
 		#If the email is unique the user is added
 		if not match:
 			print(f'Added: {new_user}')
