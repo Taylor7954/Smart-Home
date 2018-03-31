@@ -38,28 +38,7 @@ class RegisterForm(Form):
 		validators.DataRequired(),
 		validators.EqualTo('confirm', message="Passwords do not match.")])
 	confirm = PasswordField('Confirm Password')
-	
-	#create new db session
-	session = Session()
-	
-	#create new user: A new user is identified by name, email, password
-	new_user = User(name=name, email=email, password_hash=password)
-	
-	#Does the email already exist
-	match =  session.query(User)\
-            .filter(User.email==email)\
-            .all()
-	
-	#If the email is unique the user is added
-	if not match:
-		print(f'Added: {new_user}')
-		session.add(new_user)
-	
-	#save changes
-	session.commit()
-	
-	#close session
-	session.close()
+
 	
 	
 	#DATABASE FOR USER
@@ -90,6 +69,27 @@ def register():
 		name = form.name.data
 		email = form.email.data
 		password = form.password.data
+		
+		#create new db session
+		session = Session()
+		#create new user: A new user is identified by name, email, password
+		new_user = User(name=name, email=email, password_hash=password)
+	
+		#Does the email already exist
+		match =  session.query(User)\
+        .filter(email==form.email.data)\
+        .all()
+	
+		#If the email is unique the user is added
+		if not match:
+			print(f'Added: {new_user}')
+			session.add(new_user)
+	
+		#save changes
+		session.commit()
+	
+		#close session
+		session.close()
 		
 		return render_template('register.html')
 	return render_template('register.html', form=form)
