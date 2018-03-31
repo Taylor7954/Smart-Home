@@ -89,7 +89,7 @@ def register():
 	if request.method == 'POST' and form.validate():
 		name = form.name.data
 		email = form.email.data
-		password = password.data
+		password = form.password.data
 		
 		return render_template('register.html')
 	return render_template('register.html', form=form)
