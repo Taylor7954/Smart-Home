@@ -13,14 +13,14 @@ babel = Babel(app)
 #Setting main language
 @babel.localeselector
 def get_locale():
-	return 'en'
+	return 'ja'
 
 #Config PostgresSQL
 
 
 #init PostgresSQL
 
-#Home page
+#Home page1
 @app.route('/')
 def index():
 	return render_template('index.html')
