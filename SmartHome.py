@@ -3,8 +3,17 @@ from flask import Flask, render_template, flash, redirect, url_for, session, log
 from wtforms import Form, StringField, TextAreaField, PasswordField, IntegerField, validators
 from passlib.hash import sha256_crypt
 from app.models import engine, Session, User
+#Flask babel for translation
+from flask_babel import Babel, gettext
 
 app = Flask(__name__)
+app.config['BABEL_DEFAULT_LOCALE'] = 'en'
+babel = Babel(app)
+
+#Setting main language
+@babel.localeselector
+def get_locale():
+	return 'en'
 
 #Config PostgresSQL
 
@@ -87,12 +96,12 @@ def register():
 			#save changes
 			session.commit()
 		else:
-			flash("Email already registered")
+			flash(gettext("Email already registered"))
 			return render_template('register.html', form=form)
 		
 		#close connection
 		session.close()
-		flash('You are now registered and can log in', 'success')
+		flash(gettext('You are now registered and can log in', 'success'))
 		
 		return redirect(url_for('login'))
 	return render_template('register.html', form=form)
@@ -102,8 +111,8 @@ def register():
 def login():
 	if request.method == 'POST':
 		#Get form fields
-		email= request.form['email']
-		password_candidate = request.form['password']
+		email= request.form[gettext('email')]
+		password_candidate = request.form[gettext('password')]
 		
 		sess = Session()
 		
@@ -118,10 +127,10 @@ def login():
 		if userMatch:
 			session['logged_in'] = True
 			session['name'] = name[0]
-			flash("You are now logged in", "success")
+			flash(gettext("You are now logged in"), gettext("success"))
 			return redirect(url_for('index'))
 		else:
-			error="Invalid Login"
+			error=gettext("Invalid Login")
 			return render_template('login.html', error=error)
 			
 		#create cursor
@@ -158,7 +167,7 @@ def dashboard():
 @app.route('/logout')
 def logout():
 	session.clear()
-	flash('You are now logged out', 'success')
+	flash(gettext('You are now logged out'), gettext('success'))
 	return redirect(url_for('login'))
 
 if __name__ == '__main__':
