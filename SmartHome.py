@@ -111,8 +111,8 @@ def register():
 def login():
 	if request.method == 'POST':
 		#Get form fields
-		email= request.form[gettext('email')]
-		password_candidate = request.form[gettext('password')]
+		email= request.form['email']
+		password_candidate = request.form['password']
 		
 		sess = Session()
 		

@@ -1,0 +1,120 @@
+# Japanese translations for PROJECT.
+# Copyright (C) 2018 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2018-04-03 20:39-0500\n"
+"PO-Revision-Date: 2018-04-03 20:46-0500\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.3\n"
+
+#: SmartHome.py:99
+msgid "Email already registered"
+msgstr "すでに登録されたメール"
+
+#: SmartHome.py:104
+msgid "You are now registered and can log in"
+msgstr "あなたわ登録されてログインすることができます"
+
+#: SmartHome.py:130
+msgid "You are now logged in"
+msgstr "あなたわ今ログインしています"
+
+#: SmartHome.py:130 SmartHome.py:170
+msgid "success"
+msgstr "成功"
+
+#: SmartHome.py:133
+msgid "Invalid Login"
+msgstr "向尾ログイン"
+
+#: SmartHome.py:170
+msgid "You are now logged out"
+msgstr "あなたわログアウトしました"
+
+#: templates/contact.html:3
+msgid "About Us"
+msgstr "私たちに開してわ"
+
+#: templates/contact.html:4
+msgid "Development Team"
+msgstr "開発チーム"
+
+#: templates/dashboard.html:4
+msgid "DashBoard"
+msgstr "ダッシュボード"
+
+#: templates/dashboard.html:4
+msgid "Welcome, "
+msgstr "おかえりなさい"
+
+#: templates/dashboard.html:6
+msgid "Temperature:"
+msgstr "温度"
+
+#: templates/dashboard.html:8
+msgid "Utilities"
+msgstr "ユーティリティー"
+
+#: templates/dashboard.html:13 templates/dashboard.html:36
+msgid "Water"
+msgstr "みず"
+
+#: templates/dashboard.html:23 templates/dashboard.html:45
+msgid "Electricity"
+msgstr "電気"
+
+#: templates/dashboard.html:54
+msgid "Sensors"
+msgstr "センサー"
+
+#: templates/help.html:3
+msgid "Help page"
+msgstr "ヘルプページ"
+
+#: templates/index.html:5
+msgid "Smart Home"
+msgstr "スマートホーム"
+
+#: templates/index.html:8
+msgid "Dashboard"
+msgstr "ダッシュボード"
+
+#: templates/index.html:9
+msgid "Add House"
+msgstr "家お追加"
+
+#: templates/index.html:11 templates/login.html:3
+msgid "Login"
+msgstr "ログイン"
+
+#: templates/index.html:12 templates/register.html:3
+msgid "Register"
+msgstr "レジスター"
+
+#: templates/login.html:6
+msgid "Email"
+msgstr "Eメール"
+
+#: templates/login.html:10
+msgid "Password"
+msgstr "パスワード"
+
+#: templates/login.html:13
+msgid "Submit"
+msgstr "提出する"
+
+#: templates/registerHouse.html:3
+msgid "Register House"
+msgstr "レジスターハウス"
+
