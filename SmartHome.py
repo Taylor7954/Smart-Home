@@ -6,11 +6,6 @@ from app.models import engine, Session, User
 
 app = Flask(__name__)
 
-#Config PostgresSQL
-
-
-#init PostgresSQL
-
 #Home page
 @app.route('/')
 def index():
@@ -37,16 +32,6 @@ class RegisterForm(Form):
 		validators.DataRequired(),
 		validators.EqualTo('confirm', message="Passwords do not match.")])
 	confirm = PasswordField('Confirm Password')
-
-			
-	
-	#DATABASE FOR USER
-	#Create cursor  cursor = (database.connection.cursor())
-	#execute query ("INSERT INTO users(name, email, username, password) VALUES (%s, %s, %s, %s), (name, username, email, password))
-	#commit to db with (database.connect.commit()
-	#close connection cursor.close()
-	#flash('You are now registered and can log in', 'success') ** this gives success message
-	#return redirect(url_for('login')) redirect for login page
 
 @app.route('/registerHouse', methods=['GET', 'POST'])
 def registerHouse():
@@ -123,30 +108,6 @@ def login():
 		else:
 			error="Invalid Login"
 			return render_template('login.html', error=error)
-			
-		#create cursor
-		#cursor = database.connection.cursor()
-		
-		#Get user by email
-		#result = cursor.execute("SELECT * FROM users WHERE email = %s", [email])
-		#if result > 0:
-			#get stored hash
-			#data = cursor.fetchone()
-			#password = data['password'] #gets a tuple if cursorclass is established
-			
-			#compare passwords
-			#if sha256_crypt.verify(password_candidate, password):
-				#passed
-				#session['logged_in'] = True
-				#session['email'] = email
-				#flash("You are now logged in", "success")
-				#return redirect(url_for('index'))
-			#else:
-				#error = "Invalid Login"
-				#return render_template('login.html', error=error)
-		#else:
-			#error="User not found"
-			#return render_template('login.html', error=error)
 	return render_template('login.html')
 
 #Dashboard
