@@ -5,6 +5,13 @@ from passlib.hash import sha256_crypt
 from app.models import engine, Session, User
 #Flask babel for translation
 from flask_babel import Babel, gettext
+#to create the .pot file run cmd: pipenv run pybabel extract -F babel.cfg -o messages.pot --input-dirs=.
+#from there run cmd: pipenv run pybabel init -i messages.pot -d translations -l ja
+#this will make the .po file which will house the translation
+#I have done the translations and put them in the spare.txt file
+#next run cmd: pipenv run pybabel compile -d translations
+#this will make the .mo file which is by the code
+
 
 app = Flask(__name__)
 app.config['BABEL_DEFAULT_LOCALE'] = 'en'
@@ -13,6 +20,7 @@ babel = Babel(app)
 #Setting main language
 @babel.localeselector
 def get_locale():
+
 	return 'ja'
 
 #Config PostgresSQL

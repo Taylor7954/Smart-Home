@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-04-04 17:49-0500\n"
-"PO-Revision-Date: 2018-04-04 17:50-0500\n"
+"POT-Creation-Date: 2018-04-07 17:22-0500\n"
+"PO-Revision-Date: 2018-04-07 17:23-0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
 "Language-Team: ja <LL@li.org>\n"
@@ -18,31 +18,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.5.3\n"
 
-#: templates/login.html:6
-msgid "Email"
-msgstr "Eメール"
-
-#: SmartHome.py:99
+#: SmartHome.py:107
 msgid "Email already registered"
 msgstr "すでに登録されたメール"
 
-#: SmartHome.py:104
+#: SmartHome.py:112
 msgid "You are now registered and can log in"
 msgstr "あなたわ登録されてログインすることができます"
 
-#: SmartHome.py:130
+#: SmartHome.py:138
 msgid "You are now logged in"
 msgstr "あなたわ今ログインしています"
 
-#: SmartHome.py:130 SmartHome.py:170
+#: SmartHome.py:138 SmartHome.py:178
 msgid "success"
 msgstr "成功"
 
-#: SmartHome.py:133
+#: SmartHome.py:141
 msgid "Invalid Login"
 msgstr "向尾ログイン"
 
-#: SmartHome.py:170
+#: SmartHome.py:178
 msgid "You are now logged out"
 msgstr "あなたわログアウトしました"
 
@@ -60,7 +56,7 @@ msgstr "ダッシュボード"
 
 #: templates/dashboard.html:4
 msgid "Welcome, "
-msgstr "おかえりなさい"
+msgstr "おかえりなさい, "
 
 #: templates/dashboard.html:6
 msgid "Temperature:"
@@ -112,6 +108,10 @@ msgstr "レジスター"
 msgid "Welcome Home"
 msgstr "おかえりなさい"
 
+#: templates/login.html:6
+msgid "Email"
+msgstr "Eメール"
+
 #: templates/login.html:10
 msgid "Password"
 msgstr "パスワード"
@@ -147,3 +147,4 @@ msgstr "日本語"
 #: templates/includes/_navbar.html:29
 msgid "Logout"
 msgstr "ログアウト"
+
