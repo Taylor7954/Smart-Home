@@ -18,5 +18,14 @@
 		<p><input type="submit" class="btn btn-primary" value ={{_("Submit")}}></p>
 	</form>
 	<script type="javascript">
+		var lang = <%= Session["lang"] %>';
+		if (lang == 'jp')
+		{
+			
+		}
+		else
+		{
+			//set the text for the fields with EN text
+		}
 	</script>
 {% endblock %}
