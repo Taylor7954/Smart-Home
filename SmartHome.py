@@ -5,6 +5,8 @@ from passlib.hash import sha256_crypt
 from app.models import engine, Session, User
 #Flask babel for translation
 from flask_babel import Babel, gettext
+#to import flask_babel do: pip install flask_babel
+#next create the .pot file for language localisation
 #to create the .pot file run cmd: pipenv run pybabel extract -F babel.cfg -o messages.pot --input-dirs=.
 #from there run cmd: pipenv run pybabel init -i messages.pot -d translations -l ja
 #this will make the .po file which will house the translation
