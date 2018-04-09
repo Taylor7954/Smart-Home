@@ -125,6 +125,33 @@ class Forecast(Base):
     def __repr__(self):
         return f'<Forecast {self.time}, {self.latitude}, {self.longitude}>'
 
+class Utilities(Base):
+
+    # NOTE: table is only updated when usage changes
+    __tablename__ = 'capstone_utilities'
+
+    id = Column(Integer, primary_key=True)
+
+    time = Column(Integer)
+    utility_type = Column(Text)
+    # usage of watts or gallons
+    usage = Column(Float)
+
+    home_id = Column(Integer, ForeignKey('capstone_homes.id'), nullable=False)
+
+class EntryPointHistory(Base):
+    # NOTE: only updated when entry points are added or removed from list
+
+    __tablename__ = 'capstone_entry_point_history'
+
+    id = Column(Integer, primary_key=True)
+
+    time = Column(Integer)
+    # json list of open entry points
+    open_points = Column(Text)
+
+    home_id = Column(Integer, ForeignKey('capstone_homes.id'), nullable=False)
+
 # class PetTracker(Model):
 #     id = Column(Integer, primary_key=True)
 
