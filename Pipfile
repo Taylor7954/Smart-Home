@@ -13,6 +13,8 @@ wtforms = "*"
 passlib = "*"
 goslate = "*"
 pygeocoder = "*"
+flask-babel = "*"
+
 
 [dev-packages]
 pylint = "*"

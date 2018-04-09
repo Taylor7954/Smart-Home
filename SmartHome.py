@@ -2,12 +2,37 @@ from flask import Flask, render_template, flash, redirect, url_for, session, log
 # from flask_sqlalchemy import SQLAlchemy
 from wtforms import Form, StringField, TextAreaField, PasswordField, IntegerField, validators
 from passlib.hash import sha256_crypt
-from app.models import engine, Session, User, Home
+from app.models import engine, Session, User, Home, Room
 from pygeocoder import Geocoder
+#Flask babel for translation
+from flask_babel import Babel, gettext
+#to import flask_babel do: pip install flask_babel
+#next create the .pot file for language localisation
+#to create the .pot file run cmd: pipenv run pybabel extract -F babel.cfg -o messages.pot --input-dirs=.
+#from there run cmd: pipenv run pybabel init -i messages.pot -d translations -l ja
+#this will make the .po file which will house the translation
+#I have done the translations and put them in the spare.txt file
+#next run cmd: pipenv run pybabel compile -d translations
+#this will make the .mo file which is by the code
+
 
 app = Flask(__name__)
+app.config['BABEL_DEFAULT_LOCALE'] = 'en'
+babel = Babel(app)
+
+#Setting main language
+@babel.localeselector
+def get_locale():
+
+	return 'ja'
 
 #Home page
+#Config PostgresSQL
+
+
+#init PostgresSQL
+
+#Home page1
 @app.route('/')
 def index():
 	return render_template('index.html')
@@ -168,17 +193,12 @@ def register():
 			session.commit()
 		#the email is taken
 		else:
-			#error message
-			flash("Email already registered")
-			
-			#return to registration page
+			flash(gettext("Email already registered"))
 			return render_template('register.html', form=form)
 		
 		#close connection
 		session.close()
-		
-		#success message
-		flash('You are now registered and can log in', 'success')
+		flash(gettext('You are now registered and can log in'), 'success')
 		
 		#go to login page
 		return redirect(url_for('login'))
@@ -211,19 +231,12 @@ def login():
 			#save session data
 			session['logged_in'] = True
 			session['name'] = name[0]
-			session['id'] = id
-			
-			#success message
-			flash("You are now logged in", "success")
-			
-			#redirect to home page
+			flash(gettext("You are now logged in"), gettext("success"))
 			return redirect(url_for('index'))
 			
 		#No entry for user/password pair
 		else:
-			#error message
-			error="Invalid Login"
-			#return to login page
+			error=gettext("Invalid Login")
 			return render_template('login.html', error=error)
 			
 	#return to login page
@@ -275,9 +288,7 @@ def dashboard():
 def logout():
 	#clears session data on logout
 	session.clear()
-	#logout success message
-	flash('You are now logged out', 'success')
-	#redirect to login page
+	flash(gettext('You are now logged out'), gettext('success'))
 	return redirect(url_for('login'))
 
 if __name__ == '__main__':
