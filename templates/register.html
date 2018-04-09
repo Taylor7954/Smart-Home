@@ -17,5 +17,15 @@
 		</div>
 		<p><input type="submit" class="btn btn-primary" value ="Submit"></p>
 	</form>
-	
+	<script type="javascript">
+		var lang = <%= Session["lang"] %>';
+		if (lang == 'jp')
+		{
+			//set the text for the fields with wJP text
+		}
+		else
+		{
+			//set the text for the fields with EN text
+		}
+	</script>
 {% endblock %}

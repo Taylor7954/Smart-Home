@@ -48,17 +48,16 @@ def contact():
 	return render_template('contact.html')
 
 class RegisterForm(Form):
-	name = StringField('Name', [validators.Length(min=1, max=50)])
-	email = StringField('Email', [validators.Length(min=6, max= 50)])
-	address = StringField('Address', [validators.Length(min=6, max= 50)])
-	city = StringField('City', [validators.Length(min=6, max= 50)])
-	state = StringField('State', [validators.Length(min=6, max= 50)])
+	name = StringField('Name', id=Name, [validators.Length(min=1, max=50)])
+	email = StringField('Email', id=Email [validators.Length(min=6, max= 50)])
+	address = StringField('Address', id=Address [validators.Length(min=6, max= 50)])
+	city = StringField('City', id=City [validators.Length(min=6, max= 50)])
+	state = StringField('State', id=State [validators.Length(min=6, max= 50)])
 	zip = IntegerField('Zip Code')
-	
-	password = PasswordField('Password',[
+	password = PasswordField('Password', id=Password[
 		validators.DataRequired(),
 		validators.EqualTo('confirm', message="Passwords do not match.")])
-	confirm = PasswordField('Confirm Password')
+	confirm = PasswordField('Confirm Password'), id= Confirm
 
 
 @app.route('/addRoom', methods=['GET', 'POST'])
