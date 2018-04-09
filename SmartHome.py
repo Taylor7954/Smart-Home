@@ -230,6 +230,8 @@ def login():
 			#save session data
 			session['logged_in'] = True
 			session['name'] = name[0]
+			session['id'] = id
+			
 			flash(gettext("You are now logged in"), gettext("success"))
 			return redirect(url_for('index'))
 			
