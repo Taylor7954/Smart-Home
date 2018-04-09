@@ -167,6 +167,8 @@ class EntryPointHistory(Base):
 try:
     with open('sshcfg.txt', 'r') as f:
         name = f.read()
+    name = name.strip()
+    # print(name.encode())
         # print(name.encode())
 except FileNotFoundError:
     print('Create a sshcfg.txt and place your blazerid in it.')
