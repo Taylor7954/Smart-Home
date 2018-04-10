@@ -277,6 +277,7 @@ def login():
 		if userMatch:
 			#save session data
 			session['logged_in'] = True
+			session['id'] = id
 			session['name'] = name[0]
 			flash(gettext("You are now logged in"), gettext("success"))
 			return redirect(url_for('index'))

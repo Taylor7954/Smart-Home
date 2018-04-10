@@ -1,19 +1,18 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-<<<<<<< HEAD
-	<h1>DashBoard <small> Welcome, {{session.name}}</small></h1>
+	<h1>{{_('DashBoard')}} <small> {{_('Welcome')}}, {{session.name}}</small></h1>
 	{% if session.has_home %}
-		<h2> Temperature </h2>
+		<h2> {{_('Temperature')}} </h2>
 		<div class="float-right" id="weather" >
 			<script type='text/javascript' src='https://darksky.net/widget/default/{{session.latitude}},{{session.longitude}}/us12/en.js?width=100%&height=350&textColor=333333&bgColor=FFFFFF&transparency=false&skyColor=333333&fontFamily=Default&customFont=&units=us&htColor=333333&ltColor=333333&displaySum=yes&displayHeader=yes'></script>
 		</div>
-			<h2> Utilities </h2>
+			<h2> {{_('Utilities')}} </h2>
 			<div class="row">
 				<div class="col-lg-2 col-md-4 col-sm-6">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="water">Water</p>
+							<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="water">{{_('Water')}}</p>
 						</div>
 						<div class="panel-body">
 							<h2 id="waterUsage"><h2>
@@ -23,7 +22,7 @@
 				<div class="col-lg-2 col-md-4 col-sm-6">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="electric">Electricity</p>
+							<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="electric">{{_('Electricity')}}</p>
 						</div>
 						<div class="panel-body">
 							<h2 id="electricityUsage"><h2>
@@ -36,7 +35,7 @@
 				<div class="col-lg-4">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="water">Water</p>
+							<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="water">{{_('Water')}}</p>
 						</div>
 						<div class="panel-body">
 						</div>
@@ -45,7 +44,7 @@
 				<div class="col-lg-4">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="electric">Electricity</p>
+							<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="electric">{{_('Electricity')}}</p>
 						</div>
 						<div class="panel-body">
 						</div>
@@ -53,63 +52,9 @@
 				</div>
 			</div>
 			<div id="sensor">
-				<h2> Sensors </h2>
+				<h2> {{_('Sensors')}} </h2>
 			</div>
 	{% else %}
-		<a href="/registerHouse" class="btn btn-default">Add House</a>
+		<a href="/registerHouse" class="btn btn-default">{{_('Add House')}}</a>
 	{% endif %}
-=======
-	<h1>{{_('DashBoard')}} <small> {{_('Welcome, ')}}{{session.name}}</small></h1>
-	<div id="temp">
-		{{_('Temperature:')}} <span> Some database display</span>
-	</div>
-	<h2> {{_('Utilities')}} </h2>
-	<div class="row">
-		<div class="col-lg-2 col-md-4 col-sm-6">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="water">{{_('Water')}}</p>
-				</div>
-				<div class="panel-body">
-					<h2 id="waterUsage"><h2>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-2 col-md-4 col-sm-6">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="electric">{{_('Electricity')}}</p>
-				</div>
-				<div class="panel-body">
-					<h2 id="electricityUsage"><h2>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<!-- Graphs -->
-		<div class="col-lg-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="water">{{_('Water')}}</p>
-				</div>
-				<div class="panel-body">
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="electric">{{_('Electricity')}}</p>
-				</div>
-				<div class="panel-body">
-				</div>
-			</div>
-		</div>
-		</div>
-	</div>
-	<div id="sensor">
-		<h2> {{_('Sensors')}} </h2>
-	</div>
->>>>>>> db
 {% endblock %}
