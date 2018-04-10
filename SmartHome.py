@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 
 # ===PIP IMPORTS===
-=======
->>>>>>> Added language switching to navbar
 from flask import (
 	Flask, render_template, flash,
 	redirect, url_for, session, logging,
@@ -15,13 +12,10 @@ from passlib.hash import sha256_crypt
 from pygeocoder import Geocoder
 #Flask babel for translation
 from flask_babel import Babel, gettext, lazy_gettext
-<<<<<<< HEAD
 
 # ===LOCAL IMPORTS===
 from app.models import engine, Session, User, Home, Room
 
-=======
->>>>>>> complete translation
 #to import flask_babel do: pip install flask_babel
 #next create the .pot file for language localisation
 #to create the .pot file run cmd: pipenv run pybabel extract -F babel.cfg -o messages.pot --input-dirs=.
@@ -39,12 +33,16 @@ babel = Babel(app)
 @babel.localeselector
 def get_locale():
 <<<<<<< HEAD
+<<<<<<< HEAD
 	# print(g.lang)
 	return g.lang
 
 #Home page
 =======
 	print(g.lang)
+=======
+	# print(g.lang)
+>>>>>>> removed print statement
 	return g.lang
 
 >>>>>>> Added language switching to navbar
