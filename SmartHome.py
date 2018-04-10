@@ -1,4 +1,8 @@
-from flask import Flask, render_template, flash, redirect, url_for, session, logging, request
+from flask import (
+	Flask, render_template, flash,
+	redirect, url_for, session, logging,
+	request, make_response, g, redirect
+	)
 # from flask_sqlalchemy import SQLAlchemy
 from wtforms import Form, StringField, TextAreaField, PasswordField, IntegerField, validators
 from passlib.hash import sha256_crypt
@@ -22,26 +26,63 @@ babel = Babel(app)
 #Setting main language
 @babel.localeselector
 def get_locale():
-
-	return 'ja'
+	print(g.lang)
+	return g.lang
 
 #Config PostgresSQL
 
 #init PostgresSQL
 
+# handle language switch before rendering page
+def get_lang(r):
+	lang = r.cookies.get('lang')
+	if lang is None:
+		lang = 'en'
+	g.lang = lang
+
 #Home page1
 @app.route('/')
 def index():
+	get_lang(request)
+
 	return render_template('index.html')
+
+@app.route('/en')
+def en():
+
+	get_lang(request)
+	g.lang = 'en'
+
+	resp = make_response(render_template('index.html'))
+	resp.set_cookie('lang', 'en')
+	
+	return resp
+
+@app.route('/ja')
+def ja():
+
+	get_lang(request)
+	g.lang = 'ja'
+
+	resp = make_response(render_template('index.html'))
+	resp.set_cookie('lang', 'ja')
+	
+	return resp
 	
 #Help page if needed
 @app.route('/help')
 def help():
+
+	get_lang(request)
+
 	return render_template('help.html')
 	
 #Group Info
 @app.route('/contact')
 def contact():
+
+	get_lang(request)
+
 	return render_template('contact.html')
 
 class RegisterForm(Form):
@@ -68,6 +109,9 @@ class RegisterForm(Form):
 
 @app.route('/registerHouse', methods=['GET', 'POST'])
 def registerHouse():
+
+	get_lang(request)
+
 	form = RegisterForm(request.form)
 	if request.method == 'POST' and form.validate():
 		address = form.address.data
@@ -81,6 +125,9 @@ def registerHouse():
 #User Register
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+
+	get_lang(request)
+
 	form = RegisterForm(request.form)
 	if request.method == 'POST':
 		name = form.name.data
@@ -110,7 +157,7 @@ def register():
 		
 		#close connection
 		session.close()
-		flash(gettext('You are now registered and can log in', 'success'))
+		flash(gettext('You are now registered and can log in'), 'success')
 
 		return redirect(url_for('login'))
 	return render_template('register.html', form=form)
@@ -118,6 +165,9 @@ def register():
 #User Login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+
+	get_lang(request)
+
 	if request.method == 'POST':
 		#Get form fields
 		email= request.form['email']
@@ -170,11 +220,17 @@ def login():
 #Dashboard
 @app.route('/dashboard')
 def dashboard():
+	
+	get_lang(request)
+
 	return render_template('dashboard.html')
 
 #log out
 @app.route('/logout')
 def logout():
+
+	get_lang(request)
+
 	session.clear()
 	flash(gettext('You are now logged out'), gettext('success'))
 	return redirect(url_for('login'))
