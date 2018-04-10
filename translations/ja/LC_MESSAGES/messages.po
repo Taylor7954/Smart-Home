@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-04-09 11:54-0500\n"
+"POT-Creation-Date: 2018-04-10 15:07-0500\n"
 "PO-Revision-Date: 2018-04-09 11:54-0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -18,31 +18,63 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.5.3\n"
 
-#: SmartHome.py:49
+#: SmartHome.py:48
 msgid "Name"
-msgstr "こにちは"　
+msgstr "こにちは"
 
-#: SmartHome.py:110
-msgid "Email already registered"　
+#: SmartHome.py:49 templates/login.html:6
+msgid "Email"
+msgstr "Eメール"
+
+#: SmartHome.py:50
+msgid "Address"
+msgstr "住所"
+
+#: SmartHome.py:51
+msgid "City"
+msgstr "市"
+
+#: SmartHome.py:52
+msgid "State"
+msgstr "スタート"
+
+#: SmartHome.py:53
+msgid "Zip Code"
+msgstr "郵便番号"
+
+#: SmartHome.py:54 templates/login.html:10
+msgid "Password"
+msgstr "パスワード"
+
+#: SmartHome.py:56
+msgid "Passwords do not match."
+msgstr "パスワードが一致していません"
+
+#: SmartHome.py:57
+msgid "Confirm Password"
+msgstr "パスワード"
+
+#: SmartHome.py:108
+msgid "Email already registered"
 msgstr "すでに登録されたメール"
 
-#: SmartHome.py:115
+#: SmartHome.py:113
 msgid "You are now registered and can log in"
 msgstr "あなたわ登録されてログインすることができます"
 
-#: SmartHome.py:141
+#: SmartHome.py:139
 msgid "You are now logged in"
 msgstr "あなたわ今ログインしています"
 
-#: SmartHome.py:141 SmartHome.py:181
+#: SmartHome.py:139 SmartHome.py:179
 msgid "success"
 msgstr "成功"
 
-#: SmartHome.py:144
+#: SmartHome.py:142
 msgid "Invalid Login"
 msgstr "向尾ログイン"
 
-#: SmartHome.py:181
+#: SmartHome.py:179
 msgid "You are now logged out"
 msgstr "あなたわログアウトしました"
 
@@ -112,15 +144,7 @@ msgstr "レジスター"
 msgid "Welcome Home"
 msgstr "おかえりなさい"
 
-#: templates/login.html:6
-msgid "Email"
-msgstr "Eメール"
-
-#: templates/login.html:10
-msgid "Password"
-msgstr "パスワード"
-
-#: templates/login.html:13
+#: templates/login.html:13 templates/registerHouse.html:18
 msgid "Submit"
 msgstr "提出する"
 
