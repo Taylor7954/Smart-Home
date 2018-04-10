@@ -1,4 +1,4 @@
 LANGUAGES = {
-    'en': 'English'
+    'en': 'English',
     'jp': 'Japanese'
 }
