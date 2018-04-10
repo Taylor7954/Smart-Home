@@ -12,10 +12,13 @@ from passlib.hash import sha256_crypt
 from pygeocoder import Geocoder
 #Flask babel for translation
 from flask_babel import Babel, gettext, lazy_gettext
+<<<<<<< HEAD
 
 # ===LOCAL IMPORTS===
 from app.models import engine, Session, User, Home, Room
 
+=======
+>>>>>>> complete translation
 #to import flask_babel do: pip install flask_babel
 #next create the .pot file for language localisation
 #to create the .pot file run cmd: pipenv run pybabel extract -F babel.cfg -o messages.pot --input-dirs=.
@@ -93,16 +96,16 @@ def contact():
 	return render_template('contact.html')
 
 class RegisterForm(Form):
-	name = StringField('Name', id=Name, [validators.Length(min=1, max=50)])
-	email = StringField('Email', id=Email [validators.Length(min=6, max= 50)])
-	address = StringField('Address', id=Address [validators.Length(min=6, max= 50)])
-	city = StringField('City', id=City [validators.Length(min=6, max= 50)])
-	state = StringField('State', id=State [validators.Length(min=6, max= 50)])
-	zip = IntegerField('Zip Code')
-	password = PasswordField('Password', id=Password[
+	name = StringField(lazy_gettext('Name'), [validators.Length(min=1, max=50)])
+	email = StringField(lazy_gettext('Email'), [validators.Length(min=6, max= 50)])
+	address = StringField(lazy_gettext('Address'), [validators.Length(min=6, max= 50)])
+	city = StringField(lazy_gettext('City'), [validators.Length(min=6, max= 50)])
+	state = StringField(lazy_gettext('State'), [validators.Length(min=6, max= 50)])
+	zip = IntegerField(lazy_gettext('Zip Code'))
+	password = PasswordField(lazy_gettext('Password'),[
 		validators.DataRequired(),
-		validators.EqualTo('confirm', message="Passwords do not match.")])
-	confirm = PasswordField('Confirm Password'), id= Confirm
+		validators.EqualTo('confirm', message=lazy_gettext("Passwords do not match."))])
+	confirm = PasswordField(lazy_gettext('Confirm Password')),
 
 
 @app.route('/addRoom', methods=['GET', 'POST'])
