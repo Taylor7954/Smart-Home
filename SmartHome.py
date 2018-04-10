@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 
 # ===PIP IMPORTS===
+=======
+>>>>>>> Added language switching to navbar
 from flask import (
 	Flask, render_template, flash,
 	redirect, url_for, session, logging,
@@ -35,10 +38,16 @@ babel = Babel(app)
 #Setting main language
 @babel.localeselector
 def get_locale():
+<<<<<<< HEAD
 	# print(g.lang)
 	return g.lang
 
 #Home page
+=======
+	print(g.lang)
+	return g.lang
+
+>>>>>>> Added language switching to navbar
 #Config PostgresSQL
 
 #init PostgresSQL
@@ -157,7 +166,10 @@ def addRoom():
 	
 @app.route('/registerHouse', methods=['GET', 'POST'])
 def registerHouse():
+<<<<<<< HEAD
 	#generate form data
+=======
+>>>>>>> Added language switching to navbar
 
 	get_lang(request)
 
@@ -215,7 +227,10 @@ def registerHouse():
 #User Register
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+<<<<<<< HEAD
 	#generate form data
+=======
+>>>>>>> Added language switching to navbar
 
 	get_lang(request)
 
@@ -252,8 +267,6 @@ def register():
 		#close connection
 		session.close()
 		flash(gettext('You are now registered and can log in'), 'success')
-		
-		#go to login page
 		return redirect(url_for('login'))
 		
 	#return to registration page
@@ -304,6 +317,7 @@ def login():
 #Dashboard
 @app.route('/dashboard')
 def dashboard():
+<<<<<<< HEAD
 
 	#create db session
 	sess = Session()
@@ -340,6 +354,8 @@ def dashboard():
 	sess.close()
 	
 	#Directs to dashboard
+=======
+>>>>>>> Added language switching to navbar
 	
 	get_lang(request)
 
@@ -348,7 +364,10 @@ def dashboard():
 #log out
 @app.route('/logout')
 def logout():
+<<<<<<< HEAD
 	#clears session data on logout
+=======
+>>>>>>> Added language switching to navbar
 
 	get_lang(request)
 
