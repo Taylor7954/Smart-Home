@@ -26,7 +26,7 @@ babel = Babel(app)
 #Setting main language
 @babel.localeselector
 def get_locale():
-	print(g.lang)
+	# print(g.lang)
 	return g.lang
 
 #Config PostgresSQL
