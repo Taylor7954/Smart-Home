@@ -44,6 +44,8 @@ class algorithms:
         total_payment = volume_charge + base_charge
         return total_payment
 
+    # This method is used to create the temperature variation that occurs simply because
+    # the HVAC is on. It doesn't matter if the door is open or not.
     def HVAC_Run(HVAC, Interior_Temp):              # HVAC is a boolean value. True = on, False = off.
         rand = random.randint(0,100000)             # Random number to create variance in temp while HVAC runs.
         if HVAC == True and rand < 5:               # Maybe random range can be decreased due to less frequent calls?
@@ -51,3 +53,15 @@ class algorithms:
         elif HVAC == True and rand > 99995:
             Interior_Temp -= 1
         return Interior_Temp
+
+    # Not sure how door events are going to be handled, but this method just adjusts
+    # the internal temp based on external temp. In the simulation that I built to 
+    # test it, a number was being randomized each minute and this method called inside of a loop, and if the random
+    # number was the same for five consecutive minutes, the temp changed by calling
+    # this method. This method can be used for if the door is open, closed, or if a 
+    # window is open or closed.
+    def InTempChange_Door(Interior_Temp, Current_ExTemp):                 # Current_ExTemp needs to come from database.
+        if ((Interior_Temp - Current_ExTemp) >= 10):
+            Interior_Temp -= 2                                            # External temp is less than internal temp by 10. Subtract.
+        elif ((Interior_Temp - Current_ExTemp) <= -10):
+            Interior_Temp += 2                                            # External temp is greater than internal temp by 10. Add.
