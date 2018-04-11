@@ -6,8 +6,12 @@ from flask import (
 # from flask_sqlalchemy import SQLAlchemy
 from wtforms import Form, StringField, TextAreaField, PasswordField, IntegerField, validators
 from passlib.hash import sha256_crypt
+<<<<<<< HEAD
 from app.models import engine, Session, User, Home, Room
 from pygeocoder import Geocoder
+=======
+from app.models import engine, Session, Home, Room, User
+>>>>>>> d9dee1233e55f46cd98298067739a4c7498cf9d5
 #Flask babel for translation
 from flask_babel import Babel, gettext, lazy_gettext
 #to import flask_babel do: pip install flask_babel
@@ -18,7 +22,11 @@ from flask_babel import Babel, gettext, lazy_gettext
 #I have done the translations and put them in the spare.txt file
 #next run cmd: pipenv run pybabel compile -d translations
 #this will make the .mo file which is by the code
+<<<<<<< HEAD
 
+=======
+from pygeocoder import Geocoder
+>>>>>>> d9dee1233e55f46cd98298067739a4c7498cf9d5
 
 app = Flask(__name__)
 app.config['BABEL_DEFAULT_LOCALE'] = 'en'
@@ -30,7 +38,12 @@ def get_locale():
 	# print(g.lang)
 	return g.lang
 
+<<<<<<< HEAD
 #Home page
+=======
+	return 'ja'
+
+>>>>>>> d9dee1233e55f46cd98298067739a4c7498cf9d5
 #Config PostgresSQL
 
 #init PostgresSQL
@@ -43,6 +56,10 @@ def get_lang(r):
 	g.lang = lang
 
 #Home page1
+<<<<<<< HEAD
+=======
+#Home page
+>>>>>>> d9dee1233e55f46cd98298067739a4c7498cf9d5
 @app.route('/')
 def index():
 	get_lang(request)
@@ -244,7 +261,12 @@ def register():
 		#close connection
 		session.close()
 		flash(gettext('You are now registered and can log in'), 'success')
+<<<<<<< HEAD
 
+=======
+		
+		#go to login page
+>>>>>>> d9dee1233e55f46cd98298067739a4c7498cf9d5
 		return redirect(url_for('login'))
 		
 	#return to registration page
@@ -344,7 +366,11 @@ def logout():
 	get_lang(request)
 
 	session.clear()
+<<<<<<< HEAD
 	flash(gettext('You are now logged out'), gettext('success'))
+=======
+	flash(gettext('You are now logged out'), 'success')
+>>>>>>> d9dee1233e55f46cd98298067739a4c7498cf9d5
 	return redirect(url_for('login'))
 
 if __name__ == '__main__':
