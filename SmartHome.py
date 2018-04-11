@@ -114,7 +114,6 @@ class RegisterForm(Form):
 		validators.EqualTo('confirm', message=lazy_gettext("Passwords do not match."))])
 	confirm = PasswordField(lazy_gettext('Confirm Password')),
 
-
 @app.route('/addRoom', methods=['GET', 'POST'])
 def addRoom():
 	#generate data from input forms
