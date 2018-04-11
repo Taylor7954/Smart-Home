@@ -1,3 +1,5 @@
+
+# ===PIP IMPORTS===
 from flask import (
 	Flask, render_template, flash,
 	redirect, url_for, session, logging,
@@ -6,10 +8,13 @@ from flask import (
 # from flask_sqlalchemy import SQLAlchemy
 from wtforms import Form, StringField, TextAreaField, PasswordField, IntegerField, validators
 from passlib.hash import sha256_crypt
-from app.models import engine, Session, User, Home, Room
 from pygeocoder import Geocoder
 #Flask babel for translation
 from flask_babel import Babel, gettext, lazy_gettext
+
+# ===LOCAL IMPORTS===
+from app.models import engine, Session, User, Home, Room
+
 #to import flask_babel do: pip install flask_babel
 #next create the .pot file for language localisation
 #to create the .pot file run cmd: pipenv run pybabel extract -F babel.cfg -o messages.pot --input-dirs=.
@@ -18,7 +23,6 @@ from flask_babel import Babel, gettext, lazy_gettext
 #I have done the translations and put them in the spare.txt file
 #next run cmd: pipenv run pybabel compile -d translations
 #this will make the .mo file which is by the code
-
 
 app = Flask(__name__)
 app.config['BABEL_DEFAULT_LOCALE'] = 'en'
@@ -244,7 +248,8 @@ def register():
 		#close connection
 		session.close()
 		flash(gettext('You are now registered and can log in'), 'success')
-
+		
+		#go to login page
 		return redirect(url_for('login'))
 		
 	#return to registration page
