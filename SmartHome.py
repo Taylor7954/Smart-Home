@@ -32,20 +32,10 @@ babel = Babel(app)
 #Setting main language
 @babel.localeselector
 def get_locale():
-<<<<<<< HEAD
-<<<<<<< HEAD
 	# print(g.lang)
 	return g.lang
 
 #Home page
-=======
-	print(g.lang)
-=======
-	# print(g.lang)
->>>>>>> removed print statement
-	return g.lang
-
->>>>>>> Added language switching to navbar
 #Config PostgresSQL
 
 #init PostgresSQL
@@ -112,7 +102,8 @@ class RegisterForm(Form):
 	password = PasswordField(lazy_gettext('Password'),[
 		validators.DataRequired(),
 		validators.EqualTo('confirm', message=lazy_gettext("Passwords do not match."))])
-	confirm = PasswordField(lazy_gettext('Confirm Password')),
+	confirm = PasswordField(lazy_gettext('Confirm Password'))
+
 
 @app.route('/addRoom', methods=['GET', 'POST'])
 def addRoom():
@@ -163,10 +154,7 @@ def addRoom():
 	
 @app.route('/registerHouse', methods=['GET', 'POST'])
 def registerHouse():
-<<<<<<< HEAD
 	#generate form data
-=======
->>>>>>> Added language switching to navbar
 
 	get_lang(request)
 
@@ -224,10 +212,7 @@ def registerHouse():
 #User Register
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-<<<<<<< HEAD
 	#generate form data
-=======
->>>>>>> Added language switching to navbar
 
 	get_lang(request)
 
@@ -264,6 +249,8 @@ def register():
 		#close connection
 		session.close()
 		flash(gettext('You are now registered and can log in'), 'success')
+		
+		#go to login page
 		return redirect(url_for('login'))
 		
 	#return to registration page
@@ -314,7 +301,6 @@ def login():
 #Dashboard
 @app.route('/dashboard')
 def dashboard():
-<<<<<<< HEAD
 
 	#create db session
 	sess = Session()
@@ -351,8 +337,6 @@ def dashboard():
 	sess.close()
 	
 	#Directs to dashboard
-=======
->>>>>>> Added language switching to navbar
 	
 	get_lang(request)
 
@@ -361,10 +345,7 @@ def dashboard():
 #log out
 @app.route('/logout')
 def logout():
-<<<<<<< HEAD
 	#clears session data on logout
-=======
->>>>>>> Added language switching to navbar
 
 	get_lang(request)
 
