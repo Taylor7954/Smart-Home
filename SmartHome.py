@@ -8,6 +8,7 @@ from flask import (
 # from flask_sqlalchemy import SQLAlchemy
 from wtforms import Form, StringField, TextAreaField, PasswordField, IntegerField, validators
 from passlib.hash import sha256_crypt
+
 from pygeocoder import Geocoder
 #Flask babel for translation
 from flask_babel import Babel, gettext, lazy_gettext
