@@ -101,7 +101,7 @@ class RegisterForm(Form):
 	password = PasswordField(lazy_gettext('Password'),[
 		validators.DataRequired(),
 		validators.EqualTo('confirm', message=lazy_gettext("Passwords do not match."))])
-	confirm = PasswordField(lazy_gettext('Confirm Password')),
+	confirm = PasswordField(lazy_gettext('Confirm Password'))
 
 
 @app.route('/addRoom', methods=['GET', 'POST'])
