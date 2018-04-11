@@ -12,7 +12,7 @@ from passlib.hash import sha256_crypt
 from pygeocoder import Geocoder
 #Flask babel for translation
 from flask_babel import Babel, gettext, lazy_gettext
-
+import os
 # ===LOCAL IMPORTS===
 from app.models import engine, Session, User, Home, Room
 
@@ -25,14 +25,16 @@ from app.models import engine, Session, User, Home, Room
 #next run cmd: pipenv run pybabel compile -d translations
 #this will make the .mo file which is by the code
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 app.config['BABEL_DEFAULT_LOCALE'] = 'en'
 babel = Babel(app)
+
 
 #Setting main language
 @babel.localeselector
 def get_locale():
 	# print(g.lang)
+	session['lang']= g.lang
 	return g.lang
 
 #Home page
