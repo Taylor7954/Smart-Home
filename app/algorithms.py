@@ -44,7 +44,6 @@ def water_calc(count):
     total_payment = volume_charge + base_charge
     return total_payment
 
-<<<<<<< HEAD
     # This method calculates the total water bill for the month based on the amount of Ccfs used
     def water_calc(count):
         base_charge = 34.48                         # Base charge for a 3/4 inch connection in B'ham.
@@ -83,12 +82,3 @@ def water_calc(count):
             Interior_Temp -= 2                                            # External temp is less than internal temp by 10. Subtract.
         elif ((Interior_Temp - Current_ExTemp) <= -10):
             Interior_Temp += 2                                            # External temp is greater than internal temp by 10. Add.
-=======
-def HVAC_Run(HVAC, Interior_Temp):              # HVAC is a boolean value. True = on, False = off.
-    rand = random.randint(0,100000)             # Random number to create variance in temp while HVAC runs.
-    if HVAC == True and rand < 5:               # Maybe random range can be decreased due to less frequent calls?
-        Interior_Temp += 1
-    elif HVAC == True and rand > 99995:
-        Interior_Temp -= 1
-    return Interior_Temp
->>>>>>> 8ae2899d182eec5ab4482f13406745a9d2dec476
