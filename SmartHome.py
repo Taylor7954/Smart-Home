@@ -3,7 +3,7 @@
 from flask import (
 	Flask, render_template, flash,
 	redirect, url_for, session, logging,
-	request, make_response, g, redirect
+	request, make_response, g, redirect, json
 	)
 # from flask_sqlalchemy import SQLAlchemy
 from wtforms import Form, StringField, TextAreaField, PasswordField, IntegerField, validators
@@ -249,7 +249,8 @@ def login():
 #Dashboard
 @app.route('/dashboard')
 def dashboard():
-
+	session['doors'] = ['Door 1', 'Door 2', 'Door 3']
+	session['windows'] = ['Window 1', 'Window 2', 'Window 3']
 	#create db session
 	sess = Session()
 
