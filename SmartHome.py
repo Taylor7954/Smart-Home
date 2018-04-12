@@ -1,5 +1,3 @@
-
-# ===PIP IMPORTS===
 from flask import (
 	Flask, render_template, flash,
 	redirect, url_for, session, logging,
@@ -8,22 +6,22 @@ from flask import (
 # from flask_sqlalchemy import SQLAlchemy
 from wtforms import Form, StringField, TextAreaField, PasswordField, IntegerField, validators
 from passlib.hash import sha256_crypt
-
+from app.models import engine, Session, User, Home, Room
 from pygeocoder import Geocoder
 #Flask babel for translation
 from flask_babel import Babel, gettext, lazy_gettext
-
-# ===LOCAL IMPORTS===
-from app.models import engine, Session, User, Home, Room
-
 #to import flask_babel do: pip install flask_babel
 #next create the .pot file for language localisation
 #to create the .pot file run cmd: pipenv run pybabel extract -F babel.cfg -o messages.pot --input-dirs=.
 #from there run cmd: pipenv run pybabel init -i messages.pot -d translations -l ja
 #this will make the .po file which will house the translation
+#if making updates to the .po file run the cmd to make the .pot
+#then run the cmd: pybabel update -i messages.pot -d translations
+#then add the new translations to the .po
 #I have done the translations and put them in the spare.txt file
 #next run cmd: pipenv run pybabel compile -d translations
 #this will make the .mo file which is by the code
+
 
 app = Flask(__name__)
 app.config['BABEL_DEFAULT_LOCALE'] = 'en'
@@ -102,7 +100,7 @@ class RegisterForm(Form):
 	password = PasswordField(lazy_gettext('Password'),[
 		validators.DataRequired(),
 		validators.EqualTo('confirm', message=lazy_gettext("Passwords do not match."))])
-	confirm = PasswordField(lazy_gettext('Confirm Password'))
+	confirm = PasswordField(lazy_gettext('Confirm Password')),
 
 
 @app.route('/addRoom', methods=['GET', 'POST'])
@@ -249,8 +247,7 @@ def register():
 		#close connection
 		session.close()
 		flash(gettext('You are now registered and can log in'), 'success')
-		
-		#go to login page
+
 		return redirect(url_for('login'))
 		
 	#return to registration page
@@ -285,8 +282,6 @@ def login():
 			session['logged_in'] = True
 			session['id'] = id
 			session['name'] = name[0]
-			session['id'] = id
-			
 			flash(gettext("You are now logged in"), gettext("success"))
 			return redirect(url_for('index'))
 			
