@@ -44,6 +44,7 @@ def water_calc(count):
     total_payment = volume_charge + base_charge
     return total_payment
 
+<<<<<<< HEAD
     # This method calculates the total water bill for the month based on the amount of Ccfs used
     def water_calc(count):
         base_charge = 34.48                         # Base charge for a 3/4 inch connection in B'ham.
@@ -61,6 +62,8 @@ def water_calc(count):
         total_payment = volume_charge + base_charge
         return total_payment
 
+=======
+>>>>>>> pull in changes from master branch
     # This method is used to create the temperature variation that occurs simply because
     # the HVAC is on. It doesn't matter if the door is open or not.
     def HVAC_Run(HVAC, Interior_Temp):              # HVAC is a boolean value. True = on, False = off.
