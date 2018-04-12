@@ -87,13 +87,19 @@ def contact():
 
 	return render_template('contact.html')
 
+#NEEDS TO BE DONE
+def getTemp():
+	temp=70
+	return temp
+
 class RegisterForm(Form):
-	name = StringField(lazy_gettext('Name'), [validators.Length(min=1, max=50)])
-	email = StringField(lazy_gettext('Email'), [validators.Length(min=6, max= 50)])
-	address = StringField(lazy_gettext('Address'), [validators.Length(min=6, max= 50)])
-	city = StringField(lazy_gettext('City'), [validators.Length(min=6, max= 50)])
-	state = StringField(lazy_gettext('State'), [validators.Length(min=6, max= 50)])
+	name = StringField(lazy_gettext('Name'), [validators.DataRequired(), validators.Length(min=1, max=50)])
+	email = StringField(lazy_gettext('Email'), [validators.DataRequired(), validators.Length(min=6, max= 50)])
+	address = StringField(lazy_gettext('Address'), [validators.DataRequired(), validators.Length(min=6, max= 50)])
+	city = StringField(lazy_gettext('City'), [validators.DataRequired(), validators.Length(min=6, max= 50)])
+	state = StringField(lazy_gettext('State'), [validators.DataRequired(), validators.Length(min=6, max= 50)])
 	zip = IntegerField(lazy_gettext('Zip Code'))
+	temp = IntegerField(lazy_gettext('Set Temperature'),[validators.NumberRange(message="Range should be between 50 and 80.", min=50, max=80)], default=getTemp())
 	password = PasswordField(lazy_gettext('Password'),[
 		validators.DataRequired(),
 		validators.EqualTo('confirm', message=lazy_gettext("Passwords do not match."))])
@@ -247,10 +253,13 @@ def login():
 	return render_template('login.html')
 
 #Dashboard
-@app.route('/dashboard')
+@app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
 	session['doors'] = ['Door 1', 'Door 2', 'Door 3']
 	session['windows'] = ['Window 1', 'Window 2', 'Window 3']
+	session['temp'] = 68;
+
+	form = RegisterForm(request.form)
 	#create db session
 	sess = Session()
 
@@ -289,7 +298,7 @@ def dashboard():
 
 	get_lang(request)
 
-	return render_template('dashboard.html')
+	return render_template('dashboard.html', form=form)
 
 #log out
 @app.route('/logout')
