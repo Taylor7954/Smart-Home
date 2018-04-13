@@ -22,6 +22,8 @@ import os
 
 # ===LOCAL IMPORTS===
 from app.models import engine, Session, User, Home, Room
+from app.app_utils import get_water
+from app.sim_things import run_sim
 
 #to import flask_babel do: pip install flask_babel
 #next create the .pot file for language localisation
@@ -260,9 +262,6 @@ def login():
 def dashboard():
 	get_lang(request)
 	
-	session['doors'] = ['Door 1', 'Door 2', 'Door 3']
-	session['windows'] = ['Window 1', 'Window 2', 'Window 3']
-	session['temp'] = 68;
 
 	#generate form data
 	form = RegisterForm(request.form)
@@ -272,9 +271,22 @@ def dashboard():
 
 	#get user id
 	id = session['id']
+	
+	#Test session data
+	session['doors'] = ['Door 1', 'Door 2', 'Door 3']
+	session['windows'] = ['Window 1', 'Window 2', 'Window 3']
+	session['temp'] = 68;
+	session['hasMonthlyE']=False
+	session['hasWeeklyW']=False
+	session['hasWeeklyE']=False
+	session['Monthly_Water']=get_water(id, 2018, 3)
+	#session['Monthly_Electricity']=
+	#session['Weekly_Water']=
+	#session['Weekly_Electricity']=
+	
 
 	#Search for entry for house with user id
-	match = sess.query(Home.account_id)\
+	matchHome = sess.query(Home.account_id)\
 	.filter(Home.account_id==id)\
 	.all()
 
@@ -285,7 +297,7 @@ def dashboard():
 	id = sess.query(Home.id).filter(Home.account_id==id).first()
 
 	#The user has a house
-	if match:
+	if matchHome:
 		session['has_home'] = True
 		if session['has_home']:
 			#store session data
@@ -297,7 +309,7 @@ def dashboard():
 	#The user does not have a house registered
 	else:
 		session['has_home'] = False
-
+	
 	#close session
 	sess.close()
 
