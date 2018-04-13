@@ -1,7 +1,11 @@
 {% extends 'layout.html' %}
 
 {% block body %}
+<<<<<<< HEAD
 	<h1>{{_('DashBoard')}} <small> {{_('Welcome, ')}}{{session.name}}</small></h1>
+=======
+	<h1>DashBoard <small> Welcome, {{session.name}}</small></h1>
+>>>>>>> Added old files to old
 	{% if session.has_home %}
 		<h2> {{_('Temperature')}} </h2>
 		<div class="float-right" id="weather" >
