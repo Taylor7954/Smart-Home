@@ -25,3 +25,9 @@ def update_entry_points(home_id, timestamp):
     )
 
     session.commit()
+
+def get_water(home_id):
+    """Get cost since the beginning of the month"""
+
+def get_electricity(home_id):
+    """Get cost since the beginning of the month"""
