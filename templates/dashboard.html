@@ -1,36 +1,37 @@
 {% extends 'layout.html' %}
-{% from "includes/_formhelpers.html" import render_field %}
-{% block body %} {% if session.has_home %}
-<div id="temp">
-	<div class="center" id="weather">
-		<script type='text/javascript' src='https://darksky.net/widget/default-small/{{session.latitude}},{{session.longitude}}/us12/en.js?width=100%&height=70&title=Full Forecast&textColor=333333&bgColor=ffffff&transparency=false&skyColor=333333&fontFamily=Default&customFont=&units=us'></script>
-	</div>
-	<div class="center" id="weather2">
-		{% if session.lang == 'ja' %}
-		<script type='text/javascript' src='https://darksky.net/widget/graph-bar/{{session.latitude}},{{session.longitude}}/us12/ja.js?width=100%&height=400&title=Full Forecast&textColor=333333&bgColor=FFFFFF&transparency=false&skyColor=undefined&fontFamily=Default&customFont=&units=us&timeColor=333333&tempColor=333333&currentDetailsOption=true'></script>
-		{% else %}
-		<script type="text/javascript" src="https://darksky.net/widget/graph-bar/{{session.latitude}},{{session.longitude}}/us12/en.js?width=undefined&title=Full Forecast&textColor=333333&bgColor=FFFFFF&skyColor=undefined&fontFamily=Default&customFont=&units=us&timeColor=333333&tempColor=C7C7C7&currentDetailsOption=true"></script>
-		{% endif %}
-	</div>
-</div>
-<div id="dash" style="padding-left: 80px">
-	<h1>{{_('DashBoard')}} <small> {{_('Welcome, ')}}{{session.name}}</small></h1>
-	<h2> {{_('Utilities')}} </h2>
-	<div class="row">
-		<div class="col-lg-2 col-md-4 col-sm-6">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="water">{{_('Water')}}</p>
-				</div>
-				<div class="panel-body">
-					<h2 id="waterUsage"><h2>
+{% block body %}
+	{% if session.has_home %}
+	{% from "includes/_formhelpers.html" import render_field %}
+		<div id="temp">
+		<div class="center" id="weather" >
+			<script type='text/javascript' src='https://darksky.net/widget/default-small/{{session.latitude}},{{session.longitude}}/us12/en.js?width=100%&height=70&title=Full Forecast&textColor=333333&bgColor=ffffff&transparency=false&skyColor=333333&fontFamily=Default&customFont=&units=us'></script>
+		</div>
+		<div class="center" id="weather2">
+			{% if session.lang == 'ja' %}
+				<script type='text/javascript' src='https://darksky.net/widget/graph-bar/{{session.latitude}},{{session.longitude}}/us12/ja.js?width=100%&height=400&title=Full Forecast&textColor=333333&bgColor=FFFFFF&transparency=false&skyColor=undefined&fontFamily=Default&customFont=&units=us&timeColor=333333&tempColor=333333&currentDetailsOption=true'></script>
+			{% else %}
+				<script type="text/javascript" src="https://darksky.net/widget/graph-bar/{{session.latitude}},{{session.longitude}}/us12/en.js?width=undefined&title=Full Forecast&textColor=333333&bgColor=FFFFFF&skyColor=undefined&fontFamily=Default&customFont=&units=us&timeColor=333333&tempColor=C7C7C7&currentDetailsOption=true"></script>
+			{% endif %}
+		</div>
+		</div>
+		<div id="dash" style="padding-left: 80px">
+		<h1>{{_('DashBoard')}} <small> {{_('Welcome, ')}}{{session.name}}</small></h1>
+			<h2> {{_('Utilities')}} </h2>
+			<div class="row">
+				<div class="col-lg-2 col-md-4 col-sm-6">
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="water">{{_('Water (Current Week)')}}</p>
+						</div>
+						<div class="panel-body">
+							<h2 id="waterUsage"><h2>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-2 col-md-4 col-sm-6">
-					<div class="panel panel-default">
+					<div class="panel panel-primary">
 						<div class="panel-heading">
-							<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="electric">{{_('Electricity')}}</p>
+							<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="electric">{{_('Electricity (Current Week)')}}</p>
 						</div>
 						<div class="panel-body">
 							<h2 id="electricityUsage"><h2>
@@ -41,18 +42,18 @@
 			<div class="row">
 				<!-- Graphs -->
 				<div class="col-lg-4">
-					<div class="panel panel-default">
+					<div class="panel panel-primary">
 						<div class="panel-heading">
-							<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="water">{{_('Water')}}</p>
+							<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="water">{{_('Water (Monthly)')}}</p>
 						</div>
 						<div class="panel-body">
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-4">
-					<div class="panel panel-default">
+					<div class="panel panel-primary">
 						<div class="panel-heading">
-							<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="electric">{{_('Electricity')}}</p>
+							<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="electric">{{_('Electricity (Monthly)')}}</p>
 						</div>
 						<div class="panel-body">
 						</div>
@@ -69,9 +70,7 @@
 							<p><input type="submit" class="btn btn-primary" value={{_("Submit")}}></p>
 						</form>
 					</div>
-					<div id="entries">
-					</div>
-				</div>
+					<div id="entries"></div>
 			</div>
 		</div>
 
@@ -182,3 +181,4 @@
 			window.onload = start;
 		</script>
 		{% endblock %}
+

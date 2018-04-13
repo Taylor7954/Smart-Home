@@ -38,8 +38,6 @@ def run_sim(home_id):
         # now update the histor
 
         session.commit()
-
-        time.sleep(300)
         
 # start on march 1
 def main():
