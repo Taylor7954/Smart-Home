@@ -21,7 +21,7 @@ from flask_babel import Babel, gettext, lazy_gettext
 import os
 
 # ===LOCAL IMPORTS===
-from app.models import engine, Session, User, Home, Room
+from app.models import engine, Session, User, Home, Room, EntryPoint
 from app.app_utils import get_water
 from app.sim_things import run_sim
 
@@ -272,19 +272,44 @@ def dashboard():
 	#get user id
 	id = session['id']
 	
-	#Test session data
-	session['doors'] = ['Door 1', 'Door 2', 'Door 3']
-	session['windows'] = ['Window 1', 'Window 2', 'Window 3']
-	session['temp'] = 68;
-	session['hasMonthlyE']=False
-	session['hasWeeklyW']=False
-	session['hasWeeklyE']=False
-	session['Monthly_Water']=get_water(id, 2018, 3)
-	#session['Monthly_Electricity']=
-	#session['Weekly_Water']=
-	#session['Weekly_Electricity']=
+	####TEST DATA#####################################################
+	#if we are on our test account: bob
+	if id == (3,):
+		print("hi bob")
+		#Test session data
+		session['temp'] = 68;
+		session['hasThermostat']=True
+		session['hasMonthlyE']=False
+		session['hasWeeklyW']=False
+		session['hasWeeklyE']=False
+		session['hasMonthlyW']=True
+		session['Monthly_Water']=get_water(4, 2018, 3)
+		#session['Monthly_Electricity']=
+		#session['Weekly_Water']=
+		#session['Weekly_Electricity']=
+		BobsHomeId = 4
+		matchEntries = sess.query(EntryPoint.name)\
+			.filter(EntryPoint.home_id == BobsHomeId)\
+			.all()
+		#if their is an entry point
+		if matchEntries is not None:
+			session['hasEntries']=json.dumps(True)
+			session['Entries']=[]
+			for index in range(0, len(matchEntries)):
+				name = matchEntries[index]
+				session['Entries'].append(name[0])
+		else:
+			session['hasEntries']=json.dumps(False)
+	else:
+		session['Entries']=[]
+		session['hasEntries']=json.dumps(False)
+		session['hasMonthlyE']=False
+		session['hasWeeklyW']=False
+		session['hasWeeklyE']=False
+		session['hasMonthlyW']=False
+		session['hasThermostat']=False
+	####################################################################
 	
-
 	#Search for entry for house with user id
 	matchHome = sess.query(Home.account_id)\
 	.filter(Home.account_id==id)\

@@ -124,6 +124,8 @@
 			<h2> {{_('Sensors')}} </h2>
 			<!--Thermostat Component-->
 			<div id="thermostat">
+				<h3> Temperature </h3>
+				{% if session.hasThermostat %}
 				<!--Set Thermostat-->
 				<form method="POST" action="">
 					<div class="form-group">
@@ -132,10 +134,15 @@
 					<!--Submit Button-->
 					<p><input type="submit" class="btn btn-primary" value={{_("Submit")}}></p>
 				</form>
+				{% else %}
+					<p> NA </p>
+				{% endif %}
 			</div>
 				
 			<!--Entry Point Components-->
-			<div id="entries"></div>
+			<div id="entries">
+				<h3>{{_('Entry Points')}}<h3>
+			</div>
 		</div>
 	</div>
 <!--User Has Not Added House-->
@@ -164,71 +171,24 @@
 			document.getElementById(id).value = "CLOSED";
 		}
 	}
-	//Dynamically add Doors according to Database Entries
+	//Dynamically add Entry points according to Database Entries
 	//Create Button Objects with DOM
 	//PARAMETERS: NA
 	//RETURNS: NA
-	function addDoors() {
-		//doors is the array of doors
-		var doors = {{session['doors'] | tojson}};
+	function addEntries() {
+		//Entries is the array of entry points
+		var entries = {{session['Entries'] | tojson}};
 		var count = 0;
-		var doorId = 'door' + count.toString();
-		//iterate each door in doors
-		for (var i = 0; i < doors.length; i++) {
-			door = doors[i];
-			//create a div + text node (the name of the door)
-			var node = document.createElement('div');
-			var textnode = document.createTextNode(door);
-
-			//append the door name to div
-			node.appendChild(textnode);
-
-			//Create action form
-			var formnode = document.createElement('form');
-			formnode.setAttribute('action', '');
-			//Create toggle button
-			var buttonnode = document.createElement('input');
-
-			//append toggle button to form
-			formnode.appendChild(buttonnode);
-
-			//append form to div
-			node.appendChild(formnode);
-
-			//append the div to the doors div
-			document.getElementById('entries').appendChild(node);
-
-			buttonnode.setAttribute('type', 'button');
-			buttonnode.setAttribute('id', doorId);
-			buttonnode.setAttribute('style', 'color:blue');
-			buttonnode.setAttribute('value', 'CLOSED');
-			buttonnode.setAttribute('onclick', 'toggle(this.id)');
-
-			//count for id #
-			count += 1;
+		var entryId = 'entry' + count.toString();
+		//iterate each index in entries
+		for (var i = 0; i < entries.length; i++) {
+			var entry = entries[i];
 			
-			//#new doorId
-			doorId = 'door' + count.toString();
-		}
-	}
-	//Dynamically add windows according to Database Entries
-	//Create Button Objects with DOM
-	//PARAMETERS: NA
-	//RETURNS: NA
-	function addWindows() {
-		//windows is the array of windows
-		var windows = {{session['windows'] | tojson}};
-		var count = 0;
-		var windowId = 'window' + count.toString();
-		//iterate each window in windows
-		for (var i = 0; i < windows.length; i++) {
-			var window = windows[i];
-			
-			//create a div + text node (the name of the door)
+			//create a div + text node (the name of the entry point)
 			var node = document.createElement('div');
-			var textnode = document.createTextNode(window);
+			var textnode = document.createTextNode(entry);
 
-			//append the window name to div
+			//append the entry point name to div
 			node.appendChild(textnode);
 
 			//Create action form
@@ -244,11 +204,11 @@
 			//append form to div
 			node.appendChild(formnode);
 
-			//append the div to the windows div
+			//append the div to the entry point div
 			document.getElementById('entries').appendChild(node);
 
 			buttonnode.setAttribute('type', 'button');
-			buttonnode.setAttribute('id', windowId);
+			buttonnode.setAttribute('id', entryId);
 			buttonnode.setAttribute('style', 'color:blue');
 			buttonnode.setAttribute('value', 'CLOSED');
 			buttonnode.setAttribute('onclick', 'toggle(this.id)');
@@ -257,15 +217,23 @@
 			count += 1;
 			
 			//#new windowId
-			windowId = 'window' + count.toString();
+			entryId = 'entry' + count.toString();
 		}
 	}
 	//ONLOAD FUNCTION
 	function start(){
-		addDoors();
-		addWindows();
+		addEntries();
 	}
-	window.onload = start;
+	if({{session['hasEntries']}}){ 
+		window.onload = start;
+	}
+	else{
+		document.getElementById('entries').appendChild(
+			document.createElement('p').appendChild(
+				document.createTextNode('NA')
+			)
+		);
+	}
 </script>
 {% endblock %}
 
