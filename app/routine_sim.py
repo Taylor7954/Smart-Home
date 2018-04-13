@@ -121,6 +121,7 @@ def main():
         # if anything in db greater than now, continue
         match = session.query(Utilities)\
         .filter(Utilities.time > curtime)\
+        .filter(Utilities.home_id == 4)\
         .all()
 
         if match:
@@ -139,7 +140,7 @@ def main():
                 utility_type="electricity",
                 usage=_e,
                 time=curtime + random.randint(0, 86399),
-                home_id=2
+                home_id=4
             )
 
             # print('added', _e)
@@ -152,7 +153,7 @@ def main():
                 utility_type="water",
                 usage=_w,
                 time=curtime + random.randint(0, 86399),
-                home_id=2
+                home_id=4
             )
 
             session.add(new_util)
