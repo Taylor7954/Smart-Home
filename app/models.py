@@ -49,6 +49,7 @@ class Home(Base):
     longitude = Column(Float)
 
     rooms = relationship('Room', backref='capstone_homes', lazy=True)
+    entry_points = relationship('EntryPoint', backref='capstone_homes', cascade="all,delete", lazy=True)
 
 class Room(Base):
 
@@ -62,8 +63,7 @@ class Room(Base):
 
     # define lights and entry points for room
     # cascade means that if the room is deleted, so are they
-    rooms = relationship('Light', backref='capstone_rooms', cascade="all,delete", lazy=True)
-    rooms = relationship('EntryPoint', backref='capstone_rooms', cascade="all,delete", lazy=True)
+    lights = relationship('Light', backref='capstone_rooms', cascade="all,delete", lazy=True)
 
 class Light(Base):
 
@@ -87,10 +87,11 @@ class EntryPoint(Base):
 
     id = Column(Integer, primary_key=True)
 
-    room_id = Column(Integer, ForeignKey('capstone_rooms.id'), nullable=False)
-
     name = Column(Text)
     is_open = Column(Boolean)
+    type = Column(Text)
+
+    home_id = Column(Integer, ForeignKey('capstone_homes.id'), nullable=False)
 
 class ThingTracker(Base):
 

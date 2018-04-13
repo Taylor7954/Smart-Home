@@ -1,5 +1,6 @@
 {% extends 'layout.html' %}
 {% block body %}
+<<<<<<< HEAD
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
 	
@@ -83,6 +84,18 @@
 					<a href="/register" class="btn btn-default">{{_('Register')}}</a>
 				{% endif %}
 			</div>
+=======
+<div class="col-sm-6 col-sm-offset-3">
+	<div class="panel panel-default">
+		<div class="panel-heading text-center">{{_('Smart Home')}}</div>
+		<div class="panel-body text-center">
+			{% if session.logged_in %}
+				<a href="/dashboard" class="btn btn-default">{{_('Dashboard')}}</a><br>
+			{% else %}
+				<a href="/login" class="btn btn-default">{{_('Login')}}</a><br>
+				<a href="/register" class="btn btn-default">{{_('Register')}}</a>
+			{% endif %}
+>>>>>>> d1d4736704ee824cc3604f41770f5c72e1de081e
 		</div>
 	</div>
 {% endblock %}

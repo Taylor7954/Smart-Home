@@ -1,4 +1,5 @@
 {% extends 'layout.html' %}
+<<<<<<< HEAD
 
 {% block body %}
 	{% if session.has_home %}
@@ -25,6 +26,33 @@
 						</div>
 						<div class="panel-body">
 							<h2 id="waterUsage"><h2>
+=======
+{% from "includes/_formhelpers.html" import render_field %}
+{% block body %} {% if session.has_home %}
+<div id="temp">
+	<div class="center" id="weather">
+		<script type='text/javascript' src='https://darksky.net/widget/default-small/{{session.latitude}},{{session.longitude}}/us12/en.js?width=100%&height=70&title=Full Forecast&textColor=333333&bgColor=ffffff&transparency=false&skyColor=333333&fontFamily=Default&customFont=&units=us'></script>
+	</div>
+	<div class="center" id="weather2">
+		{% if session.lang == 'ja' %}
+		<script type='text/javascript' src='https://darksky.net/widget/graph-bar/{{session.latitude}},{{session.longitude}}/us12/ja.js?width=100%&height=400&title=Full Forecast&textColor=333333&bgColor=FFFFFF&transparency=false&skyColor=undefined&fontFamily=Default&customFont=&units=us&timeColor=333333&tempColor=333333&currentDetailsOption=true'></script>
+		{% else %}
+		<script type="text/javascript" src="https://darksky.net/widget/graph-bar/{{session.latitude}},{{session.longitude}}/us12/en.js?width=undefined&title=Full Forecast&textColor=333333&bgColor=FFFFFF&skyColor=undefined&fontFamily=Default&customFont=&units=us&timeColor=333333&tempColor=C7C7C7&currentDetailsOption=true"></script>
+		{% endif %}
+	</div>
+</div>
+<div id="dash" style="padding-left: 80px">
+	<h1>{{_('DashBoard')}} <small> {{_('Welcome, ')}}{{session.name}}</small></h1>
+	<h2> {{_('Utilities')}} </h2>
+	<div class="row">
+		<div class="col-lg-2 col-md-4 col-sm-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="water">{{_('Water')}}</p>
+				</div>
+				<div class="panel-body">
+					<h2 id="waterUsage"><h2>
+>>>>>>> d1d4736704ee824cc3604f41770f5c72e1de081e
 						</div>
 					</div>
 				</div>
@@ -62,7 +90,19 @@
 			</div>
 			<div id="sensor">
 				<h2> {{_('Sensors')}} </h2>
+					<div id="thermostat">
+						<form method="POST" action="">
+							<div class="form-group">
+								{{render_field(form.temp, class_="form-control")}}
+							</div>
+							<p><input type="submit" class="btn btn-primary" value={{_("Submit")}}></p>
+						</form>
+					</div>
+					<div id="entries">
+					</div>
+				</div>
 			</div>
+<<<<<<< HEAD
 			</div>
 			</div>
 
@@ -72,3 +112,114 @@
 		<a href="/registerHouse" class="btn btn-default">{{_('Add House')}}</a>
 	{% endif %}
 {% endblock %}
+=======
+		</div>
+
+		{% else %}
+		<h1>{{_('DashBoard')}} <small> {{_('Welcome, ')}}{{session.name}}</small></h1>
+		<a href="/registerHouse" class="btn btn-default">{{_('Add House')}}</a> {% endif %}
+
+		<script type="text/javascript">
+			function updateTextInput(val){
+				document.getElementById('textInput').value=val;
+			}
+			function toggle(id) {
+				console.log(id);
+				if (document.getElementById(id).value == "CLOSED") {
+					document.getElementById(id).value = "OPEN";
+				} else {
+					document.getElementById(id).value = "CLOSED";
+				}
+			}
+			function addDoors() {
+				//doors is the array of doors
+				var doors = {{session['doors'] | tojson}};
+				var count = 0;
+				var doorId = 'door' + count.toString();
+				//iterate each door in doors
+				for (var i = 0; i < doors.length; i++) {
+					door = doors[i];
+					//create a div + text node (the name of the door)
+					var node = document.createElement('div');
+					var textnode = document.createTextNode(door);
+
+					//append the door name to div
+					node.appendChild(textnode);
+
+					//Create action form
+					var formnode = document.createElement('form');
+					formnode.setAttribute('action', '');
+					//Create toggle button
+					var buttonnode = document.createElement('input');
+
+					//append toggle button to form
+					formnode.appendChild(buttonnode);
+
+					//append form to div
+					node.appendChild(formnode);
+
+					//append the div to the doors div
+					document.getElementById('entries').appendChild(node);
+
+					buttonnode.setAttribute('type', 'button');
+					buttonnode.setAttribute('id', doorId);
+					buttonnode.setAttribute('style', 'color:blue');
+					buttonnode.setAttribute('value', 'CLOSED');
+					buttonnode.setAttribute('onclick', 'toggle(this.id)');
+
+					//count for id #
+					count += 1;
+					//#new doorId
+					doorId = 'door' + count.toString();
+				}
+			}
+			function addWindows() {
+				//doors is the array of doors
+				var windows = {{session['windows'] | tojson}};
+				var count = 0;
+				var windowId = 'window' + count.toString();
+				//iterate each window in windows
+				for (var i = 0; i < windows.length; i++) {
+					var window = windows[i];
+					//create a div + text node (the name of the door)
+					var node = document.createElement('div');
+					var textnode = document.createTextNode(window);
+
+					//append the window name to div
+					node.appendChild(textnode);
+
+					//Create action form
+					var formnode = document.createElement('form');
+					formnode.setAttribute('action', '');
+					//Create toggle button
+					var buttonnode = document.createElement('input');
+
+					//append toggle button to form
+					formnode.appendChild(buttonnode);
+
+					//append form to div
+					node.appendChild(formnode);
+
+					//append the div to the windows div
+					document.getElementById('entries').appendChild(node);
+
+					buttonnode.setAttribute('type', 'button');
+					buttonnode.setAttribute('id', windowId);
+					buttonnode.setAttribute('style', 'color:blue');
+					buttonnode.setAttribute('value', 'CLOSED');
+					buttonnode.setAttribute('onclick', 'toggle(this.id)');
+
+					//count for id #
+					count += 1;
+					//#new windowId
+					windowId = 'window' + count.toString();
+				}
+			}
+			function start(){
+				addDoors();
+				addWindows();
+			}
+			window.onload = start;
+		</script>
+		{% endblock %}
+>>>>>>> d1d4736704ee824cc3604f41770f5c72e1de081e
