@@ -1,8 +1,9 @@
-{% extends 'layout.html' %}
-{% block body %}
+{% extends 'layout.html' %}{% block body %}
+<!--Template For Home Page-->
 
+<!--Home page Image Slider-->
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
-	
+	<!--Slide Indicators-->
 	<ol class = "carousel-indicators">
 		<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 		<li data-target="#myCarousel" data-slide-to="1"></li>
@@ -17,6 +18,7 @@
 		<li data-target="#myCarousel" data-slide-to="10"></li>				
 	</ol>
 	
+	<!--Set Images to slider -->
 	<div class = "carousel-inner">
 		<div class = "item active">
 			<img src = "{{url_for('static', filename = 'images/smart-home1.jpg')}}" alt="smart-home1" class = "img-responsive center-block">
@@ -63,30 +65,35 @@
 		</div>
 	</div>
 	
+	<!--Left Slider Button-->
 	<a class="left carousel-control" href="#myCarousel" data-slide = "prev">
 		<span class = "icon-prev"></span>
 	</a>
 	
+	<!--Right Slider Button-->
 	<a class="right carousel-control" href="#myCarousel" data-slide="next">
 		<span class = "icon-next"></span>
 	</a>
-</div>	
+</div><div></div><br>
 
-<div></div>
-
-<br>
-
-	<div class="col-sm-6 col-sm-offset-3">
-		<div class="panel panel-primary">
-			<div class="panel-heading text-center">{{_('Smart Home')}}</div>
-			<div class="panel-body text-center">
-				{% if session.logged_in %}
-					<a href="/dashboard" class="btn btn-default">{{_('Dashboard')}}</a><br>
-				{% else %}
-					<a href="/login" class="btn btn-default">{{_('Login')}}</a><br>
-					<a href="/register" class="btn btn-default">{{_('Register')}}</a>
-				{% endif %}
-			</div>
+<!--Home page Navigation Panel-->
+<div class="col-sm-6 col-sm-offset-3">
+	<div class="panel panel-primary">
+		<!--Panel Header-->
+		<div class="panel-heading text-center">{{_('Smart Home')}}</div>
+		<!--Panel Body-->
+		<div class="panel-body text-center">
+			<!--User is logged in-->
+			{% if session.logged_in %}
+				<!--Display Buttons-->
+				<a href="/dashboard" class="btn btn-default">{{_('Dashboard')}}</a><br>
+			<!--User is not logged in-->
+			{% else %}
+				<!--Display Buttons-->
+				<a href="/login" class="btn btn-default">{{_('Login')}}</a><br>
+				<a href="/register" class="btn btn-default">{{_('Register')}}</a>
+			{% endif %}
 		</div>
 	</div>
+</div>
 {% endblock %}

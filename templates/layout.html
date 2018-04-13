@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html>
+	<!--LAYOUT PAGE-->
 	<head>
+		<!--Webpage Title-->
 		<title>{{_('Welcome Home')}}</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<style>
-		</style>
 	</head>
 	<body>
+		<!--Includes-->
 		{% include 'includes/_navbar.html' %}
 		{% include 'includes/_messages.html' %}
+		
+		<!--Body Block-->
 		{% block body %}{% endblock %}
+		
+		<!--Bootstrap Script-->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</body>
 </html>
