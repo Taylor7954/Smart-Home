@@ -1,27 +1,40 @@
+<!--Create Navbar Component-->
+
+<!--Banner-->
 <div class="header-row" style="background-color: #D3D3D3">
 	<div class="container-fluid">
 		<div style="padding-right: 30px; padding-left: 30px" class="row">
 			<div>
-				<div style="font-family: 'Helvetica', 'Arial', sans-serif; font-size: 32px"><img width="48px" height="48px" src="{{url_for('static', filename = 'images/Home.png')}}" /><span>{{_('Smart Home')}}</span>
-					<span class="pull-right" style="font-family: 'Helvetica', 'Arial', sans-serif; font-size: 24px">{{_('Protect & Monitor Your Home')}}</span></div>
+				<div style="font-family: 'Helvetica', 'Arial', sans-serif; font-size: 32px"><img width = "48px" height = "48px" src="{{url_for('static', filename = 'images/Home.png')}}" /><span>{{_('Smart Home')}}</span>
+				<span class="pull-right" style="font-family: 'Helvetica', 'Arial', sans-serif; font-size: 24px">{{_('Protect & Monitor Your Home')}}</span></div>
 			</div>
 		</div>
 	</div>
 </div>
+
+<!--Navigation-->
 <nav class="navbar navbar-inverse">
-	<!--<div class="container">-->
+	<!--Navbar Header Component-->
 	<div class="navbar-header">
 		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-	</div>
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+    </div>
+	
+	<!--Navbar Body Component-->
 	<div id="navbar" class="collapse navbar-collapse">
+		<!--Left Side-->
 		<ul class="nav navbar-nav">
+			<!--Directs To Home Page-->
 			<li><a href="/">{{_('Home')}}</a></li>
+			
+			<!--Directs To Group Information Page-->
 			<li><a href="/contact">{{_('Development Team')}}</a></li>
+			
+			<!--Language Select-->
 			<li class="dropdown">
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#">{{_('Languages')}}
 					<span class="caret"></span></a>
@@ -31,18 +44,19 @@
 				</ul>
 			</li>
 		</ul>
+		
+		<!--Right Side-->
 		<ul class="nav navbar-nav navbar-right">
+			<!--User is logged in-->
 			{% if session.logged_in %}
-			<li><a href="/dashboard">{{_('Dashboard')}}</a></li>
-			<li><a href="/logout">{{_('Logout')}}</a></li>
+				<!--Directs To Dashboard/Logout Page-->
+				<li><a href="/dashboard">{{_('Dashboard')}}</a></li>
+				<li><a href="/logout">{{_('Logout')}}</a></li>
 			{% else %}
-			<!--<li><a href="/registerHouse">Add House</a></li>-->
-			<!--<li><a href="/dashboard">Dashboard</a></li>-->
-			<li><a href="/login">{{_('Login')}}</a></li>
-			<li><a href="/register">{{_('Register')}}</a></li>
+				<!--Directs To Login/Register Page-->
+				<li><a href="/login">{{_('Login')}}</a></li>
+				<li><a href="/register">{{_('Register')}}</a></li>
 			{% endif %}
 		</ul>
 	</div>
-	<!--/.nav-collapse -->
-	<!--</div>-->
 </nav>

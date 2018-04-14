@@ -1,20 +1,29 @@
-
 # ===PIP IMPORTS===
+#Flask imports
 from flask import (
 	Flask, render_template, flash,
 	redirect, url_for, session, logging,
 	request, make_response, g, redirect, json
 	)
 # from flask_sqlalchemy import SQLAlchemy
+
+#Forms
 from wtforms import Form, StringField, TextAreaField, PasswordField, IntegerField, validators
+
+#Password hashing
 from passlib.hash import sha256_crypt
 
+#Latitude and longitude
 from pygeocoder import Geocoder
-#Flask babel for translation
+
+#Translation
 from flask_babel import Babel, gettext, lazy_gettext
 import os
+
 # ===LOCAL IMPORTS===
-from app.models import engine, Session, User, Home, Room
+from app.models import engine, Session, User, Home, Room, EntryPoint
+from app.app_utils import get_water
+from app.sim_things import run_sim
 
 #to import flask_babel do: pip install flask_babel
 #next create the .pot file for language localisation
@@ -25,6 +34,7 @@ from app.models import engine, Session, User, Home, Room
 #next run cmd: pipenv run pybabel compile -d translations
 #this will make the .mo file which is by the code
 
+#Configure application
 app = Flask(__name__, static_url_path='/static')
 app.config['BABEL_DEFAULT_LOCALE'] = 'en'
 babel = Babel(app)
@@ -33,29 +43,25 @@ babel = Babel(app)
 #Setting main language
 @babel.localeselector
 def get_locale():
-	# print(g.lang)
 	session['lang']= g.lang
 	return g.lang
 
-#Home page
-#Config PostgresSQL
-
-#init PostgresSQL
-
-# handle language switch before rendering page
+#Handle language switch before rendering page
 def get_lang(r):
 	lang = r.cookies.get('lang')
 	if lang is None:
 		lang = 'en'
 	g.lang = lang
 
-#Home page1
+#Home Page
 @app.route('/')
 def index():
 	get_lang(request)
 
 	return render_template('index.html')
 
+#English cookie
+#Return: response to set language code to 'en'
 @app.route('/en')
 def en():
 
@@ -67,6 +73,8 @@ def en():
 
 	return resp
 
+#Japanese cookie
+#Return: response to set language code to 'ja'
 @app.route('/ja')
 def ja():
 
@@ -79,7 +87,7 @@ def ja():
 	return resp
 
 
-#Group Info
+#Group Information Page
 @app.route('/contact')
 def contact():
 
@@ -87,11 +95,12 @@ def contact():
 
 	return render_template('contact.html')
 
-#NEEDS TO BE DONE
+#Get Temperature from database
 def getTemp():
 	temp=70
 	return temp
 
+#wtForm validators
 class RegisterForm(Form):
 	name = StringField(lazy_gettext('Name'), [validators.DataRequired(), validators.Length(min=1, max=50)])
 	email = StringField(lazy_gettext('Email'), [validators.DataRequired(), validators.Length(min=6, max= 50)])
@@ -106,14 +115,12 @@ class RegisterForm(Form):
 	confirm = PasswordField(lazy_gettext('Confirm Password'))
 
 
+#User House Registration Page
 @app.route('/registerHouse', methods=['GET', 'POST'])
 def registerHouse():
-	#generate form data
-
 	get_lang(request)
-
+	#generate form data
 	form = RegisterForm(request.form)
-
 	if request.method == 'POST':
 		#store form data
 		address = form.address.data
@@ -163,15 +170,13 @@ def registerHouse():
 		return redirect(url_for('dashboard'))
 	return render_template('registerHouse.html', form=form)
 
-#User Register
+#User Register Page
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-	#generate form data
-
 	get_lang(request)
-
+	
+	#generate form data
 	form = RegisterForm(request.form)
-
 	if request.method == 'POST':
 		#store form data
 		name = form.name.data
@@ -210,12 +215,12 @@ def register():
 	#return to registration page
 	return render_template('register.html', form=form)
 
-#User Login
+#User Login Page
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-
 	get_lang(request)
-
+	
+	#Login Request
 	if request.method == 'POST':
 		#Get form fields
 		email= request.form['email']
@@ -252,22 +257,61 @@ def login():
 	#return to login page
 	return render_template('login.html')
 
-#Dashboard
+#Dashboard Page
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
-	session['doors'] = ['Door 1', 'Door 2', 'Door 3']
-	session['windows'] = ['Window 1', 'Window 2', 'Window 3']
-	session['temp'] = 68;
+	get_lang(request)
+	
 
+	#generate form data
 	form = RegisterForm(request.form)
+	
 	#create db session
 	sess = Session()
 
 	#get user id
 	id = session['id']
-
+	
+	####TEST DATA#####################################################
+	#if we are on our test account: bob
+	if id == (3,):
+		print("hi bob")
+		#Test session data
+		session['temp'] = 68;
+		session['hasThermostat']=True
+		session['hasMonthlyE']=False
+		session['hasWeeklyW']=False
+		session['hasWeeklyE']=False
+		session['hasMonthlyW']=True
+		session['Monthly_Water']=get_water(4, 2018, 3)
+		#session['Monthly_Electricity']=
+		#session['Weekly_Water']=
+		#session['Weekly_Electricity']=
+		BobsHomeId = 4
+		matchEntries = sess.query(EntryPoint.name)\
+			.filter(EntryPoint.home_id == BobsHomeId)\
+			.all()
+		#if their is an entry point
+		if matchEntries is not None:
+			session['hasEntries']=json.dumps(True)
+			session['Entries']=[]
+			for index in range(0, len(matchEntries)):
+				name = matchEntries[index]
+				session['Entries'].append(name[0])
+		else:
+			session['hasEntries']=json.dumps(False)
+	else:
+		session['Entries']=[]
+		session['hasEntries']=json.dumps(False)
+		session['hasMonthlyE']=False
+		session['hasWeeklyW']=False
+		session['hasWeeklyE']=False
+		session['hasMonthlyW']=False
+		session['hasThermostat']=False
+	####################################################################
+	
 	#Search for entry for house with user id
-	match = sess.query(Home.account_id)\
+	matchHome = sess.query(Home.account_id)\
 	.filter(Home.account_id==id)\
 	.all()
 
@@ -278,7 +322,7 @@ def dashboard():
 	id = sess.query(Home.id).filter(Home.account_id==id).first()
 
 	#The user has a house
-	if match:
+	if matchHome:
 		session['has_home'] = True
 		if session['has_home']:
 			#store session data
@@ -290,27 +334,28 @@ def dashboard():
 	#The user does not have a house registered
 	else:
 		session['has_home'] = False
-
+	
 	#close session
 	sess.close()
 
 	#Directs to dashboard
-
-	get_lang(request)
-
 	return render_template('dashboard.html', form=form)
 
 #log out
 @app.route('/logout')
 def logout():
-	#clears session data on logout
-
 	get_lang(request)
 
+	#clear session data on logout
 	session.clear()
+	
+	#Logout success message
 	flash(gettext('You are now logged out'), gettext('success'))
+	
+	#redirect to login page
 	return redirect(url_for('login'))
 
+#Run application
 if __name__ == '__main__':
 	app.secret_key='secret123'
 	app.run(debug=True)

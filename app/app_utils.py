@@ -1,9 +1,8 @@
 
 import json
-
 from datetime import datetime
 
-from models import EntryPoint, EntryPointHistory, Utilities, Session
+from app.models import EntryPoint, EntryPointHistory, Utilities, Session
 
 session = Session()
 
@@ -40,7 +39,7 @@ def get_water(home_id, year, month):
         year += 1
         month = 1
     next_month = datetime(year, month, 1).timestamp()
-    print(cur_month, next_month)
+    #print(cur_month, next_month)
 
     # base cost of bill
     base_charge = 34.48
@@ -75,7 +74,6 @@ def get_water(home_id, year, month):
 
 def get_electricity(home_id):
     """Get cost since the beginning of the month"""
-
+	
 if __name__ == '__main__':
     water = get_water(4, 2018, 3)
-    print(water)

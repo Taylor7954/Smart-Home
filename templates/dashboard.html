@@ -1,184 +1,239 @@
-{% extends 'layout.html' %}
+{% extends 'layout.html' %}{% block body %}
+<!--Includes-->
 {% from "includes/_formhelpers.html" import render_field %}
-{% block body %} {% if session.has_home %}
-<div id="temp">
-	<div class="center" id="weather">
-		<script type='text/javascript' src='https://darksky.net/widget/default-small/{{session.latitude}},{{session.longitude}}/us12/en.js?width=100%&height=70&title=Full Forecast&textColor=333333&bgColor=ffffff&transparency=false&skyColor=333333&fontFamily=Default&customFont=&units=us'></script>
+
+<!--Does User Have A House-->
+{% if session.has_home %}
+	<!--Displays Outside Weather Information-->
+	<div id="temp">
+		<div class="center" id="weather" >
+			<script type='text/javascript' src='https://darksky.net/widget/default-small/{{session.latitude}},{{session.longitude}}/us12/en.js?width=100%&height=70&title=Full Forecast&textColor=333333&bgColor=ffffff&transparency=false&skyColor=333333&fontFamily=Default&customFont=&units=us'></script>
+		</div>
+		<!--
+			Displays Weather Information From DarkSky.net
+			Displays Information In Currently Selected Language
+			Displays Location Based On Home Address
+		-->
+		<div class="center" id="weather2">
+			{% if session.lang == 'ja' %}
+				<script type='text/javascript' src='https://darksky.net/widget/graph-bar/{{session.latitude}},{{session.longitude}}/us12/ja.js?width=100%&height=400&title=Full Forecast&textColor=333333&bgColor=FFFFFF&transparency=false&skyColor=undefined&fontFamily=Default&customFont=&units=us&timeColor=333333&tempColor=333333&currentDetailsOption=true'></script>
+			{% else %}
+				<script type="text/javascript" src="https://darksky.net/widget/graph-bar/{{session.latitude}},{{session.longitude}}/us12/en.js?width=undefined&title=Full Forecast&textColor=333333&bgColor=FFFFFF&skyColor=undefined&fontFamily=Default&customFont=&units=us&timeColor=333333&tempColor=C7C7C7&currentDetailsOption=true"></script>
+			{% endif %}
+		</div>
 	</div>
-	<div class="center" id="weather2">
-		{% if session.lang == 'ja' %}
-		<script type='text/javascript' src='https://darksky.net/widget/graph-bar/{{session.latitude}},{{session.longitude}}/us12/ja.js?width=100%&height=400&title=Full Forecast&textColor=333333&bgColor=FFFFFF&transparency=false&skyColor=undefined&fontFamily=Default&customFont=&units=us&timeColor=333333&tempColor=333333&currentDetailsOption=true'></script>
-		{% else %}
-		<script type="text/javascript" src="https://darksky.net/widget/graph-bar/{{session.latitude}},{{session.longitude}}/us12/en.js?width=undefined&title=Full Forecast&textColor=333333&bgColor=FFFFFF&skyColor=undefined&fontFamily=Default&customFont=&units=us&timeColor=333333&tempColor=C7C7C7&currentDetailsOption=true"></script>
-		{% endif %}
-	</div>
-</div>
-<div id="dash" style="padding-left: 80px">
-	<h1>{{_('DashBoard')}} <small> {{_('Welcome, ')}}{{session.name}}</small></h1>
-	<h2> {{_('Utilities')}} </h2>
-	<div class="row">
-		<div class="col-lg-2 col-md-4 col-sm-6">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="water">{{_('Water')}}</p>
-				</div>
-				<div class="panel-body">
-					<h2 id="waterUsage"><h2>
-						</div>
+	
+	<!--Displays Main Dashboard Components-->
+	<div id="dash" style="padding-left: 80px">
+	
+		<!--Welcome Message-->
+		<h1>{{_('DashBoard')}} <small> {{_('Welcome, ')}}{{session.name}}</small></h1>
+			
+		<!--Utility Components-->
+		<h2> {{_('Utilities')}} </h2>
+		
+		<!--Weekly Utility Widgets-->
+		<div class="row">
+		
+			<!--Weekly Water Utility Widget-->
+			<div class="col-lg-2 col-md-4 col-sm-6">
+				<div class="panel panel-primary">
+					<!--Weekly Water Utility Panel Widget Header-->
+					<div class="panel-heading">
+						<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="water">{{_('Water (Weekly)')}}</p>
 					</div>
-				</div>
-				<div class="col-lg-2 col-md-4 col-sm-6">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="electric">{{_('Electricity')}}</p>
-						</div>
-						<div class="panel-body">
-							<h2 id="electricityUsage"><h2>
-						</div>
+					<!--Weekly Water Utility Panel Widget Body-->	
+					<div class="panel-body">
+						<h2 id="wWaterUsage">
+						{% if session.hasWeeklyE %}
+						<!--{{session.Weekly_Water}}-->
+						{% else %}
+							N/A
+						{% endif %}						
+						<h2>
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<!-- Graphs -->
-				<div class="col-lg-4">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="water">{{_('Water')}}</p>
-						</div>
-						<div class="panel-body">
-						</div>
+			
+			<!--Weekly Electricity Utility Widget-->
+			<div class="col-lg-2 col-md-4 col-sm-6">
+				<div class="panel panel-primary">
+					<!--Weekly Electricity Utility Panel Widget Header-->	
+					<div class="panel-heading">
+						<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="electric">{{_('Electricity (Weekly)')}}</p>
 					</div>
-				</div>
-				<div class="col-lg-4">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="electric">{{_('Electricity')}}</p>
-						</div>
-						<div class="panel-body">
-						</div>
-					</div>
-				</div>
-			</div>
-			<div id="sensor">
-				<h2> {{_('Sensors')}} </h2>
-					<div id="thermostat">
-						<form method="POST" action="">
-							<div class="form-group">
-								{{render_field(form.temp, class_="form-control")}}
-							</div>
-							<p><input type="submit" class="btn btn-primary" value={{_("Submit")}}></p>
-						</form>
-					</div>
-					<div id="entries">
+					<!--Weekly Electricity Utility Panel Widget Body-->	
+					<div class="panel-body">
+						<h2 id="wElectricityUsage">
+						{% if session.hasWeeklyE %}
+						<!--{{session.Weekly_Electricity}}-->
+						{% else %}
+							N/A
+						{% endif %}
+						<h2>
 					</div>
 				</div>
 			</div>
 		</div>
+		<!--Monthly Utility Widgets-->
+		<div class="row">
+		
+			<!--Monthly Water Utility Widget-->
+			<div class="col-lg-2 col-md-4 col-sm-6">
+				<div class="panel panel-primary">
+					<!--Monthly Water Utility Panel Widget Header-->
+					<div class="panel-heading">
+						<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="water">{{_('Water (Monthly)')}}</p>
+					</div>
+					<!--Monthly Water Utility Panel Widget Body-->
+					<div class="panel-body">
+						<h2 id="wWaterUsage">
+						{% if session.hasMonthlyW %}
+							{{session.Monthly_Water}}
+						{% else %}
+							N/A
+						{% endif %}
+						<h2>
+					</div>
+				</div>
+			</div>
+			
+			<!--Monthly Electricity Utility Widget-->	
+			<div class="col-lg-2 col-md-4 col-sm-6">
+				<div class="panel panel-primary">
+					<!--Monthly Electricity Utility Panel Widget Header-->	
+					<div class="panel-heading">
+						<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="electric">{{_('Electricity (Monthly)')}}</p>
+					</div>
+					<!--Monthly Electricity Utility Panel Widget Body-->	
+					<div class="panel-body">
+						<h2 id="wElectricityUsage">
+						{% if session.hasMonthlyE %}
+						<!--{{session.Weekly_Electricity}}-->
+						{% else %}
+							N/A
+						{% endif %}						
+						<h2>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!--Sensor Components-->
+		<div id="sensor">
+			<h2> {{_('Sensors')}} </h2>
+			<!--Thermostat Component-->
+			<div id="thermostat">
+				<h3> Temperature </h3>
+				{% if session.hasThermostat %}
+				<!--Set Thermostat-->
+				<form method="POST" action="">
+					<div class="form-group">
+						{{render_field(form.temp, class_="form-control")}}
+					</div>
+					<!--Submit Button-->
+					<p><input type="submit" class="btn btn-primary" value={{_("Submit")}}></p>
+				</form>
+				{% else %}
+					<p> NA </p>
+				{% endif %}
+			</div>
+				
+			<!--Entry Point Components-->
+			<div id="entries">
+				<h3>{{_('Entry Points')}}<h3>
+			</div>
+		</div>
+	</div>
+<!--User Has Not Added House-->
+{% else %}
+	<!--User Greeting-->
+	<h1>{{_('DashBoard')}} <small> {{_('Welcome, ')}}{{session.name}}</small></h1>
+	<!--Register House Button-->
+	<a href="/registerHouse" class="btn btn-default">{{_('Add House')}}</a> 
+{% endif %}
+<script type="text/javascript">
+	//Updates Text for Thermostat
+	//Sets Value equal to Parameter
+	//PARAMETERS: val
+	//RETURNS: NA
+	function updateTextInput(val){
+		document.getElementById('textInput').value=val;
+	}
+	//Toggle Buttons OPEN(1)/CLOSED(0)
+	//Sets value of the element to 0 or 1
+	//PARAMETERS: id
+	//RETURNS: NA
+	function toggle(id) {
+		if (document.getElementById(id).value == "CLOSED") {
+			document.getElementById(id).value = "OPEN";
+		} else {
+			document.getElementById(id).value = "CLOSED";
+		}
+	}
+	//Dynamically add Entry points according to Database Entries
+	//Create Button Objects with DOM
+	//PARAMETERS: NA
+	//RETURNS: NA
+	function addEntries() {
+		//Entries is the array of entry points
+		var entries = {{session['Entries'] | tojson}};
+		var count = 0;
+		var entryId = 'entry' + count.toString();
+		//iterate each index in entries
+		for (var i = 0; i < entries.length; i++) {
+			var entry = entries[i];
+			
+			//create a div + text node (the name of the entry point)
+			var node = document.createElement('div');
+			var textnode = document.createTextNode(entry);
 
-		{% else %}
-		<h1>{{_('DashBoard')}} <small> {{_('Welcome, ')}}{{session.name}}</small></h1>
-		<a href="/registerHouse" class="btn btn-default">{{_('Add House')}}</a> {% endif %}
+			//append the entry point name to div
+			node.appendChild(textnode);
 
-		<script type="text/javascript">
-			function updateTextInput(val){
-				document.getElementById('textInput').value=val;
-			}
-			function toggle(id) {
-				console.log(id);
-				if (document.getElementById(id).value == "CLOSED") {
-					document.getElementById(id).value = "OPEN";
-				} else {
-					document.getElementById(id).value = "CLOSED";
-				}
-			}
-			function addDoors() {
-				//doors is the array of doors
-				var doors = {{session['doors'] | tojson}};
-				var count = 0;
-				var doorId = 'door' + count.toString();
-				//iterate each door in doors
-				for (var i = 0; i < doors.length; i++) {
-					door = doors[i];
-					//create a div + text node (the name of the door)
-					var node = document.createElement('div');
-					var textnode = document.createTextNode(door);
+			//Create action form
+			var formnode = document.createElement('form');
+			formnode.setAttribute('action', '');
+			
+			//Create toggle button
+			var buttonnode = document.createElement('input');
 
-					//append the door name to div
-					node.appendChild(textnode);
+			//append toggle button to form
+			formnode.appendChild(buttonnode);
 
-					//Create action form
-					var formnode = document.createElement('form');
-					formnode.setAttribute('action', '');
-					//Create toggle button
-					var buttonnode = document.createElement('input');
+			//append form to div
+			node.appendChild(formnode);
 
-					//append toggle button to form
-					formnode.appendChild(buttonnode);
+			//append the div to the entry point div
+			document.getElementById('entries').appendChild(node);
 
-					//append form to div
-					node.appendChild(formnode);
+			buttonnode.setAttribute('type', 'button');
+			buttonnode.setAttribute('id', entryId);
+			buttonnode.setAttribute('style', 'color:blue');
+			buttonnode.setAttribute('value', 'CLOSED');
+			buttonnode.setAttribute('onclick', 'toggle(this.id)');
 
-					//append the div to the doors div
-					document.getElementById('entries').appendChild(node);
+			//count for id #
+			count += 1;
+			
+			//#new windowId
+			entryId = 'entry' + count.toString();
+		}
+	}
+	//ONLOAD FUNCTION
+	function start(){
+		addEntries();
+	}
+	if({{session['hasEntries']}}){ 
+		window.onload = start;
+	}
+	else{
+		document.getElementById('entries').appendChild(
+			document.createElement('p').appendChild(
+				document.createTextNode('NA')
+			)
+		);
+	}
+</script>
+{% endblock %}
 
-					buttonnode.setAttribute('type', 'button');
-					buttonnode.setAttribute('id', doorId);
-					buttonnode.setAttribute('style', 'color:blue');
-					buttonnode.setAttribute('value', 'CLOSED');
-					buttonnode.setAttribute('onclick', 'toggle(this.id)');
-
-					//count for id #
-					count += 1;
-					//#new doorId
-					doorId = 'door' + count.toString();
-				}
-			}
-			function addWindows() {
-				//doors is the array of doors
-				var windows = {{session['windows'] | tojson}};
-				var count = 0;
-				var windowId = 'window' + count.toString();
-				//iterate each window in windows
-				for (var i = 0; i < windows.length; i++) {
-					var window = windows[i];
-					//create a div + text node (the name of the door)
-					var node = document.createElement('div');
-					var textnode = document.createTextNode(window);
-
-					//append the window name to div
-					node.appendChild(textnode);
-
-					//Create action form
-					var formnode = document.createElement('form');
-					formnode.setAttribute('action', '');
-					//Create toggle button
-					var buttonnode = document.createElement('input');
-
-					//append toggle button to form
-					formnode.appendChild(buttonnode);
-
-					//append form to div
-					node.appendChild(formnode);
-
-					//append the div to the windows div
-					document.getElementById('entries').appendChild(node);
-
-					buttonnode.setAttribute('type', 'button');
-					buttonnode.setAttribute('id', windowId);
-					buttonnode.setAttribute('style', 'color:blue');
-					buttonnode.setAttribute('value', 'CLOSED');
-					buttonnode.setAttribute('onclick', 'toggle(this.id)');
-
-					//count for id #
-					count += 1;
-					//#new windowId
-					windowId = 'window' + count.toString();
-				}
-			}
-			function start(){
-				addDoors();
-				addWindows();
-			}
-			window.onload = start;
-		</script>
-		{% endblock %}
