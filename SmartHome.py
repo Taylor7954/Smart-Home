@@ -30,6 +30,9 @@ from app.sim_things import run_sim
 #to create the .pot file run cmd: pipenv run pybabel extract -F babel.cfg -o messages.pot --input-dirs=.
 #from there run cmd: pipenv run pybabel init -i messages.pot -d translations -l ja
 #this will make the .po file which will house the translation
+#to update the .po file first run the cmd to make the .pot file
+#then run: pybabel update -i messages.pot -d translations
+#this will update the .po file
 #I have done the translations and put them in the spare.txt file
 #next run cmd: pipenv run pybabel compile -d translations
 #this will make the .mo file which is by the code
