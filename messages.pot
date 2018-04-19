@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-04-16 08:54-0500\n"
+"POT-Creation-Date: 2018-04-19 13:54-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,27 +17,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.5.3\n"
 
-#: SmartHome.py:205
+#: SmartHome.py:208
 msgid "Email already registered"
 msgstr ""
 
-#: SmartHome.py:210
+#: SmartHome.py:213
 msgid "You are now registered and can log in"
 msgstr ""
 
-#: SmartHome.py:249
+#: SmartHome.py:252
 msgid "You are now logged in"
 msgstr ""
 
-#: SmartHome.py:249 SmartHome.py:353
+#: SmartHome.py:252 SmartHome.py:380
 msgid "success"
 msgstr ""
 
-#: SmartHome.py:254
+#: SmartHome.py:257
 msgid "Invalid Login"
 msgstr ""
 
-#: SmartHome.py:353
+#: SmartHome.py:307
+msgid "Dog"
+msgstr ""
+
+#: SmartHome.py:308
+msgid "Keys"
+msgstr ""
+
+#: SmartHome.py:380
 msgid "You are now logged out"
 msgstr ""
 
@@ -49,11 +57,11 @@ msgstr ""
 msgid "Development Team"
 msgstr ""
 
-#: templates/dashboard.html:30 templates/dashboard.html:151
+#: templates/dashboard.html:30 templates/dashboard.html:276
 msgid "DashBoard"
 msgstr ""
 
-#: templates/dashboard.html:30 templates/dashboard.html:151
+#: templates/dashboard.html:30 templates/dashboard.html:276
 msgid "Welcome, "
 msgstr ""
 
@@ -62,35 +70,79 @@ msgid "Utilities"
 msgstr ""
 
 #: templates/dashboard.html:43
-msgid "Water (Weekly)"
+msgid "Water (Last Week)"
+msgstr ""
+
+#: templates/dashboard.html:51 templates/dashboard.html:71
+#: templates/dashboard.html:91 templates/dashboard.html:111
+#: templates/dashboard.html:134 templates/dashboard.html:154
+#: templates/dashboard.html:174 templates/dashboard.html:194
+#: templates/dashboard.html:223
+msgid "Not available"
 msgstr ""
 
 #: templates/dashboard.html:63
-msgid "Electricity (Weekly)"
+msgid "Electricity (Last Week)"
 msgstr ""
 
-#: templates/dashboard.html:86
-msgid "Water (Monthly)"
+#: templates/dashboard.html:83
+msgid "Water (Current Week Estimate)"
 msgstr ""
 
-#: templates/dashboard.html:106
-msgid "Electricity (Monthly)"
+#: templates/dashboard.html:103
+msgid "Electricity (Current Week Estimate)"
 msgstr ""
 
-#: templates/dashboard.html:124
+#: templates/dashboard.html:126
+msgid "Water (Last Month)"
+msgstr ""
+
+#: templates/dashboard.html:146
+msgid "Electricity (Last Month)"
+msgstr ""
+
+#: templates/dashboard.html:166
+msgid "Water (Current Month Estimate)"
+msgstr ""
+
+#: templates/dashboard.html:186
+msgid "Electricity (Current Month Estimate)"
+msgstr ""
+
+#: templates/dashboard.html:203
 msgid "Sensors"
 msgstr ""
 
-#: templates/dashboard.html:135 templates/login.html:17
+#: templates/dashboard.html:210
+msgid "Temperature"
+msgstr ""
+
+#: templates/dashboard.html:220 templates/login.html:17
 #: templates/register.html:25 templates/registerHouse.html:25
 msgid "Submit"
 msgstr ""
 
-#: templates/dashboard.html:144
+#: templates/dashboard.html:239
+msgid "Your dog is currently in the"
+msgstr ""
+
+#: templates/dashboard.html:241
+msgid "Your dog is currently not in the house"
+msgstr ""
+
+#: templates/dashboard.html:257
+msgid "Your keys are currently in the"
+msgstr ""
+
+#: templates/dashboard.html:259
+msgid "Your keys are currently not in the house."
+msgstr ""
+
+#: templates/dashboard.html:269
 msgid "Entry Points"
 msgstr ""
 
-#: templates/dashboard.html:153
+#: templates/dashboard.html:278
 msgid "Add House"
 msgstr ""
 

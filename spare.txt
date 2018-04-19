@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-04-16 08:54-0500\n"
+"POT-Creation-Date: 2018-04-19 13:54-0500\n"
 "PO-Revision-Date: 2018-04-09 11:54-0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -18,27 +18,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.5.3\n"
 
-#: SmartHome.py:205
+#: SmartHome.py:208
 msgid "Email already registered"
 msgstr "すでに登録されたメール"
 
-#: SmartHome.py:210
+#: SmartHome.py:213
 msgid "You are now registered and can log in"
 msgstr "あなたわ登録されてログインすることができます"
 
-#: SmartHome.py:249
+#: SmartHome.py:252
 msgid "You are now logged in"
 msgstr "あなたわ今ログインしています"
 
-#: SmartHome.py:249 SmartHome.py:353
+#: SmartHome.py:252 SmartHome.py:380
 msgid "success"
 msgstr "成功"
 
-#: SmartHome.py:254
+#: SmartHome.py:257
 msgid "Invalid Login"
 msgstr "向尾ログイン"
 
-#: SmartHome.py:353
+#: SmartHome.py:307
+msgid "Dog"
+msgstr "犬"
+
+#: SmartHome.py:308
+msgid "Keys"
+msgstr "鍵"
+
+#: SmartHome.py:380
 msgid "You are now logged out"
 msgstr "あなたわログアウトしました"
 
@@ -50,11 +58,11 @@ msgstr "私たちに開してわ"
 msgid "Development Team"
 msgstr "開発チーム"
 
-#: templates/dashboard.html:30 templates/dashboard.html:151
+#: templates/dashboard.html:30 templates/dashboard.html:276
 msgid "DashBoard"
 msgstr "ダッシュボード"
 
-#: templates/dashboard.html:30 templates/dashboard.html:151
+#: templates/dashboard.html:30 templates/dashboard.html:276
 msgid "Welcome, "
 msgstr "おかえりなさい, "
 
@@ -63,35 +71,79 @@ msgid "Utilities"
 msgstr "ユーティリティー"
 
 #: templates/dashboard.html:43
-msgid "Water (Weekly)"
-msgstr "みず(週間)"
+msgid "Water (Last Week)"
+msgstr "みず(先週)"
+
+#: templates/dashboard.html:51 templates/dashboard.html:71
+#: templates/dashboard.html:91 templates/dashboard.html:111
+#: templates/dashboard.html:134 templates/dashboard.html:154
+#: templates/dashboard.html:174 templates/dashboard.html:194
+#: templates/dashboard.html:223
+msgid "Not available"
+msgstr "利用不可"
 
 #: templates/dashboard.html:63
-msgid "Electricity (Weekly)"
-msgstr "電気(週間)"
+msgid "Electricity (Last Week)"
+msgstr "電気(先週)"
 
-#: templates/dashboard.html:86
-msgid "Water (Monthly)"
-msgstr "みず(毎月)"
+#: templates/dashboard.html:83
+msgid "Water (Current Week Estimate)"
+msgstr "みず(今週)"
 
-#: templates/dashboard.html:106
-msgid "Electricity (Monthly)"
-msgstr "電気(毎月)"
+#: templates/dashboard.html:103
+msgid "Electricity (Current Week Estimate)"
+msgstr "電気(今週)"
 
-#: templates/dashboard.html:124
+#: templates/dashboard.html:126
+msgid "Water (Last Month)"
+msgstr "みず(先月)"
+
+#: templates/dashboard.html:146
+msgid "Electricity (Last Month)"
+msgstr "電気(先月)"
+
+#: templates/dashboard.html:166
+msgid "Water (Current Month Estimate)"
+msgstr "みず(今月)"
+
+#: templates/dashboard.html:186
+msgid "Electricity (Current Month Estimate)"
+msgstr "電気(今月)"
+
+#: templates/dashboard.html:203
 msgid "Sensors"
 msgstr "センサー"
 
-#: templates/dashboard.html:135 templates/login.html:17
+#: templates/dashboard.html:210
+msgid "Temperature"
+msgstr "温度"
+
+#: templates/dashboard.html:220 templates/login.html:17
 #: templates/register.html:25 templates/registerHouse.html:25
 msgid "Submit"
 msgstr "提出する"
 
-#: templates/dashboard.html:144
+#: templates/dashboard.html:239
+msgid "Your dog is currently in the"
+msgstr "あなたの犬は現在"
+
+#: templates/dashboard.html:241
+msgid "Your dog is currently not in the house"
+msgstr "あなたの犬は現在家にいます。"
+
+#: templates/dashboard.html:257
+msgid "Your keys are currently in the"
+msgstr "あなたの鍵は現在"
+
+#: templates/dashboard.html:259
+msgid "Your keys are currently not in the house."
+msgstr "あなたの鍵は現在家にあります。"
+
+#: templates/dashboard.html:269
 msgid "Entry Points"
 msgstr "入り口"
 
-#: templates/dashboard.html:153
+#: templates/dashboard.html:278
 msgid "Add House"
 msgstr "家お追加"
 
@@ -188,4 +240,16 @@ msgstr "ログアウト"
 
 #~ msgid "Smart Home 0.5"
 #~ msgstr "スマートホーム 0.5"
+
+#~ msgid "Water (Weekly)"
+#~ msgstr "みず(週間)"
+
+#~ msgid "Electricity (Weekly)"
+#~ msgstr "電気(週間)"
+
+#~ msgid "Water (Monthly)"
+#~ msgstr "みず(毎月)"
+
+#~ msgid "Electricity (Monthly)"
+#~ msgstr "電気(毎月)"
 
