@@ -100,7 +100,7 @@ def contact():
 
 #Get Temperature from database
 def getTemp():
-	temp=70
+	temp = 70
 	return temp
 
 #wtForm validators
@@ -280,16 +280,33 @@ def dashboard():
 	if id == (3,):
 		print("hi bob")
 		#Test session data
-		session['temp'] = 68;
+		session['temp'] = 70;
 		session['hasThermostat']=True
-		session['hasMonthlyE']=False
-		session['hasWeeklyW']=False
-		session['hasWeeklyE']=False
+		#current month/week
+		session['hasCMonthlyE']=True
+		session['hasCWeeklyW']=True
+		session['hasCWeeklyE']=True
+		session['hasCMonthlyW']=True
+		session['Current_Month_Water']=round(get_water(4, 2018, 3) + 2.54, 2)
+		session['Current_Week_Water']=round(get_water(4, 2018, 3)/4 + 0.64, 2)
+		session['Current_Month_Electricity']=round(115.26 + 2.65, 2)
+		session['Current_Week_Electricity']=round(115.26/4 + 0.66, 2)
+		#last month/week data
+		session['hasCMonthlyE']=True
+		session['hasWeeklyW']=True
+		session['hasWeeklyE']=True
 		session['hasMonthlyW']=True
-		session['Monthly_Water']=get_water(4, 2018, 3)
-		#session['Monthly_Electricity']=
-		#session['Weekly_Water']=
-		#session['Weekly_Electricity']=
+		session['Last_Month_Water']=get_water(4, 2018, 3)
+		session['Last_Week_Water']=round(get_water(4, 2018, 3)/4, 2)
+		session['Last_Month_Electricity']=115.26
+		session['Last_Week_Electricity']=round(115.26/4, 2)
+		#tracker data
+		session['hasTracker']=True
+		session['keyIsHome']=False
+		session['dogIsHome']=True
+		session['trackerNameDog']='Dog'
+		session['trackerNameKeys']='Keys'
+		session['room_dog']="Living Room"
 		BobsHomeId = 4
 		matchEntries = sess.query(EntryPoint.name)\
 			.filter(EntryPoint.home_id == BobsHomeId)\
@@ -311,6 +328,13 @@ def dashboard():
 		session['hasWeeklyE']=False
 		session['hasMonthlyW']=False
 		session['hasThermostat']=False
+		session['hasTracker']=False
+		session['keyIsHome']=False
+		session['dogIsHome']=False
+		session['hasCMonthlyE']=False
+		session['hasCWeeklyW']=False
+		session['hasCWeeklyE']=False
+		session['hasCMonthlyW']=False
 	####################################################################
 	
 	#Search for entry for house with user id

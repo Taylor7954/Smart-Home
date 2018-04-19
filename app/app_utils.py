@@ -70,7 +70,7 @@ def get_water(home_id, year, month):
 
     usage_charge = ccf_usage * ccf_multiplier + base_charge
 
-    return usage_charge
+    return round(usage_charge, 2)
 
 def get_electricity(home_id):
     """Get cost since the beginning of the month"""

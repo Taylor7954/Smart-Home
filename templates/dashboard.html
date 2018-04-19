@@ -35,40 +35,80 @@
 		<!--Weekly Utility Widgets-->
 		<div class="row">
 		
-			<!--Weekly Water Utility Widget-->
+			<!--Last Week Water Utility Widget-->
 			<div class="col-lg-2 col-md-4 col-sm-6">
 				<div class="panel panel-primary">
 					<!--Weekly Water Utility Panel Widget Header-->
 					<div class="panel-heading">
-						<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="water">{{_('Water (Weekly)')}}</p>
+						<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="water">{{_('Water (Last Week)')}}</p>
 					</div>
 					<!--Weekly Water Utility Panel Widget Body-->	
 					<div class="panel-body">
-						<h2 id="wWaterUsage">
-						{% if session.hasWeeklyE %}
-						<!--{{session.Weekly_Water}}-->
+						<h2 id="lwWaterUsage">
+						{% if session.hasWeeklyW %}
+							{{session.Last_Week_Water}}
 						{% else %}
-							N/A
+							{{_('Not available')}}
 						{% endif %}						
 						<h2>
 					</div>
 				</div>
 			</div>
 			
-			<!--Weekly Electricity Utility Widget-->
+			<!--Last Week Electricity Utility Widget-->
 			<div class="col-lg-2 col-md-4 col-sm-6">
 				<div class="panel panel-primary">
 					<!--Weekly Electricity Utility Panel Widget Header-->	
 					<div class="panel-heading">
-						<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="electric">{{_('Electricity (Weekly)')}}</p>
+						<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="electric">{{_('Electricity (Last Week)')}}</p>
 					</div>
 					<!--Weekly Electricity Utility Panel Widget Body-->	
 					<div class="panel-body">
-						<h2 id="wElectricityUsage">
+						<h2 id="lwElectricityUsage">
 						{% if session.hasWeeklyE %}
-						<!--{{session.Weekly_Electricity}}-->
+							{{session.Last_Week_Electricity}}
 						{% else %}
-							N/A
+							{{_('Not available')}}
+						{% endif %}
+						<h2>
+					</div>
+				</div>
+			</div>
+			
+			<!--Current Week Water Utility Widget-->
+			<div class="col-lg-2 col-md-4 col-sm-6">
+				<div class="panel panel-primary">
+					<!--Weekly Water Utility Panel Widget Header-->
+					<div class="panel-heading">
+						<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="water">{{_('Water (Current Week Estimate)')}}</p>
+					</div>
+					<!--Weekly Water Utility Panel Widget Body-->	
+					<div class="panel-body">
+						<h2 id="cwWaterUsage">
+						{% if session.hasCWeeklyW %}
+							{{session.Current_Week_Water}}
+						{% else %}
+							{{_('Not available')}}
+						{% endif %}						
+						<h2>
+					</div>
+				</div>
+			</div>
+			
+			<!--Current Week Electricity Utility Widget-->
+			<div class="col-lg-2 col-md-4 col-sm-6">
+				<div class="panel panel-primary">
+					<!--Weekly Electricity Utility Panel Widget Header-->	
+					<div class="panel-heading">
+						<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="electric">{{_('Electricity (Current Week Estimate)')}}</p>
+					</div>
+					<!--Weekly Electricity Utility Panel Widget Body-->	
+					<div class="panel-body">
+						<h2 id="cwElectricityUsage">
+						{% if session.hasCWeeklyE %}
+							{{session.Current_Week_Electricity}}
+						{% else %}
+							{{_('Not available')}}
 						{% endif %}
 						<h2>
 					</div>
@@ -78,40 +118,80 @@
 		<!--Monthly Utility Widgets-->
 		<div class="row">
 		
-			<!--Monthly Water Utility Widget-->
+			<!--Last Month Water Utility Widget-->
 			<div class="col-lg-2 col-md-4 col-sm-6">
 				<div class="panel panel-primary">
 					<!--Monthly Water Utility Panel Widget Header-->
 					<div class="panel-heading">
-						<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="water">{{_('Water (Monthly)')}}</p>
+						<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="water">{{_('Water (Last Month)')}}</p>
 					</div>
 					<!--Monthly Water Utility Panel Widget Body-->
 					<div class="panel-body">
 						<h2 id="wWaterUsage">
 						{% if session.hasMonthlyW %}
-							{{session.Monthly_Water}}
+							{{session.Last_Month_Water}}
 						{% else %}
-							N/A
+							{{_('Not available')}}
 						{% endif %}
 						<h2>
 					</div>
 				</div>
 			</div>
 			
-			<!--Monthly Electricity Utility Widget-->	
+			<!--Last Month Electricity Utility Widget-->	
 			<div class="col-lg-2 col-md-4 col-sm-6">
 				<div class="panel panel-primary">
 					<!--Monthly Electricity Utility Panel Widget Header-->	
 					<div class="panel-heading">
-						<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="electric">{{_('Electricity (Monthly)')}}</p>
+						<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="electric">{{_('Electricity (Last Month)')}}</p>
 					</div>
 					<!--Monthly Electricity Utility Panel Widget Body-->	
 					<div class="panel-body">
 						<h2 id="wElectricityUsage">
 						{% if session.hasMonthlyE %}
-						<!--{{session.Weekly_Electricity}}-->
+							{{session.Last_Month_Electricity}}
 						{% else %}
-							N/A
+							{{_('Not available')}}
+						{% endif %}						
+						<h2>
+					</div>
+				</div>
+			</div>
+			
+			<!--Current Month Water Utility Widget-->
+			<div class="col-lg-2 col-md-4 col-sm-6">
+				<div class="panel panel-primary">
+					<!--Monthly Water Utility Panel Widget Header-->
+					<div class="panel-heading">
+						<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="water">{{_('Water (Current Month Estimate)')}}</p>
+					</div>
+					<!--Monthly Water Utility Panel Widget Body-->
+					<div class="panel-body">
+						<h2 id="wWaterUsage">
+						{% if session.hasCMonthlyW %}
+							{{session.Current_Month_Water}}
+						{% else %}
+							{{_('Not available')}}
+						{% endif %}
+						<h2>
+					</div>
+				</div>
+			</div>
+			
+			<!--Current Month Electricity Utility Widget-->	
+			<div class="col-lg-2 col-md-4 col-sm-6">
+				<div class="panel panel-primary">
+					<!--Monthly Electricity Utility Panel Widget Header-->	
+					<div class="panel-heading">
+						<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="electric">{{_('Electricity (Current Month Estimate)')}}</p>
+					</div>
+					<!--Monthly Electricity Utility Panel Widget Body-->	
+					<div class="panel-body">
+						<h2 id="wElectricityUsage">
+						{% if session.hasCMonthlyE %}
+							{{session.Current_Month_Electricity}}
+						{% else %}
+							{{_('Not available')}}
 						{% endif %}						
 						<h2>
 					</div>
@@ -120,31 +200,76 @@
 		</div>
 		
 		<!--Sensor Components-->
-		<div id="sensor">
-			<h2> {{_('Sensors')}} </h2>
-			<!--Thermostat Component-->
-			<div id="thermostat">
-				<h3> Temperature </h3>
-				{% if session.hasThermostat %}
-				<!--Set Thermostat-->
-				<form method="POST" action="">
-					<div class="form-group">
-						{{render_field(form.temp, class_="form-control")}}
-					</div>
-					<!--Submit Button-->
-					<p><input type="submit" class="btn btn-primary" value={{_("Submit")}}></p>
-				</form>
-				{% else %}
-					<p> NA </p>
-				{% endif %}
-			</div>
-				
-			<!--Entry Point Components-->
-			<div id="entries">
-				<h3>{{_('Entry Points')}}<h3>
+		<h2> {{_('Sensors')}} </h2>
+		<div class=row>
+		<!--Thermostat Component-->
+		<div class="col-lg-2 col-md-4 col-sm-6">
+			<div class="panel panel-primary">
+				<!--Monthly Electricity Utility Panel Widget Header-->	
+				<div class="panel-heading">
+					<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="temp">{{_('Temperature')}}</p>
+				</div>
+				<div class="panel-body" id="thermostat">
+					{% if session.hasThermostat %}
+					<!--Set Thermostat-->
+						<form method="POST" action="">
+							<div class="form-group">
+								{{render_field(form.temp, class_="form-control")}}
+							</div>
+							<!--Submit Button-->
+							<p><input type="submit" class="btn btn-primary" value={{_("Submit")}}></p>
+						</form>
+					{% else %}
+						<p> {{_('Not available')}} </p>
+					{% endif %}
+				</div>
 			</div>
 		</div>
+		{% if session.hasTracker %}
+		<!--Unimplemented Dog Tracker-->
+		<div class="col-lg-2 col-md-4 col-sm-6">
+			<div class="panel panel-primary">
+				<!--Example Dog Tracker Header-->	
+				<div class="panel-heading">
+					<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="temp">{{session.trackerNameDog}}</p>
+				</div>
+				<!--Example Dog Tracker Display-->
+				<div class="panel-body" id="tracker">
+					{% if session.dogIsHome %}
+						<p> {{_('Your dog is currently in the')}} {{session.room_dog}}. </p>
+					{% else %}
+						<p> {{_('Your dog is currently not in the house')}}.</p>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+		
+		<!--Unimplemented Key Tracker-->
+		<div class="col-lg-2 col-md-4 col-sm-6">
+			<div class="panel panel-primary">
+				<!--Example Key Tracker Header-->	
+				<div class="panel-heading">
+					<p class="m-0 text-uppercase font-600 font-secondary text-overflow text-center" title="temp">{{session.trackerNameKeys}}</p>
+				</div>
+				<!--Example Key Tracker Display-->
+				<div class="panel-body" id="tracker">
+						{% if session.keyIsHome %}
+							<p> {{_('Your keys are currently in the')}} {{session.room_keys}}. </p>
+						{% else %}
+							<p> {{_('Your keys are currently not in the house.')}}</p>
+						{% endif %}
+				</div>
+			</div>
+		</div>
+		{% endif %}
+		</div>
+				
+		<!--Entry Point Components-->
+		<div id="entries">
+			<h3>{{_('Entry Points')}}<h3>
+		</div>
 	</div>
+	
 <!--User Has Not Added House-->
 {% else %}
 	<!--User Greeting-->
