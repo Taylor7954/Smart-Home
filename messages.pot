@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-04-19 13:54-0500\n"
+"POT-Creation-Date: 2018-04-19 13:59-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,14 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.5.3\n"
+
+#: SmartHome.py:114
+msgid "Set Temperature"
+msgstr ""
+
+#: SmartHome.py:114
+msgid "Range should be between 50 and 80."
+msgstr ""
 
 #: SmartHome.py:208
 msgid "Email already registered"

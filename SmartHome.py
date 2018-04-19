@@ -111,7 +111,7 @@ class RegisterForm(Form):
 	city = StringField(lazy_gettext('City'), [validators.DataRequired(), validators.Length(min=6, max= 50)])
 	state = StringField(lazy_gettext('State'), [validators.DataRequired(), validators.Length(min=6, max= 50)])
 	zip = IntegerField(lazy_gettext('Zip Code'))
-	temp = IntegerField(lazy_gettext('Set Temperature'),[validators.NumberRange(message=lazy_gettext("Range should be between 50 and 80."), min=50, max=80)], default=getTemp())
+	temp = IntegerField(gettext('Set Temperature'),[validators.NumberRange(message=gettext("Range should be between 50 and 80."), min=50, max=80)], default=getTemp())
 	password = PasswordField(lazy_gettext('Password'),[
 		validators.DataRequired(),
 		validators.EqualTo('confirm', message=lazy_gettext("Passwords do not match."))])
